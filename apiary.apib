@@ -1,0 +1,514 @@
+FORMAT: 1A
+
+HOST:  http://pd-testing.us-west-2.elasticbeanstalk.com/
+
+# Order Taking System
+
+Testing Server : http://pd-testing.us-west-2.elasticbeanstalk.com/
+
+Note : Refer to the url in the production for our purpose
+
+Order Taking System used to sync orders between various phones
+
+## Table API [/api/tables/{id}]
+
++ Parameters
+   + id (required)
+
+### List All Tables [GET/api/tables]
+
+To list all the tables.
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+            {
+                "id": 12,
+                "tableName": "1"
+            },
+            {
+                "id": 13,
+                "tableName": "2"
+            },
+            {
+                "id": 14,
+                "tableName": "3"
+            },
+            {
+                "id": 15,
+                "tableName": "4"
+            },
+            {   
+                "id": 16,
+                "tableName": "5"
+            }
+         ]
+        }
+
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while retrieving table from database."
+            }
+        }
+        
+### Get a particular table [GET/api/tables/{id}]
+
+To retrieve a particular table
+
++ Response 200 (application/json)
+
+        {
+            "data": 
+            {
+                "id": 12,
+                "tableName": "1"
+            }
+        }
+        
+
++ Response 404 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "You are trying to access a table not in database."
+            }
+        }
+    
+
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while retrieving table from database."
+            }
+        }
+      
+### Create a new Table [POST/api/tables]
+
+We can also create a new table. It takes a JSON response and returns all tables as response.
+
++ Request 
+
+        {
+            "table" : "6"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+            {
+                "id": 12,
+                "tableName": "1"
+            },
+            {
+                "id": 13,
+                "tableName": "2"
+            },
+            {
+                "id": 14,
+                "tableName": "3"
+            },
+            {
+                "id": 15,
+                "tableName": "4"
+            },
+            {   
+                "id": 16,
+                "tableName": "5"
+            }, 
+            {   
+                "id": 17,
+                "tableName": "6"
+            }
+        ]
+        }
+    
++ Response 422 (application/json)
+
+        {
+        "error": {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name field is required."
+                ]
+                }
+            }
+        }
+    
++ Response 422 (application/json)
+
+        {
+        "error": {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name has already been taken."
+                ]
+                }
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while creating table."
+            }
+        }
+        
+        
+### Delete a Table [DELETE/api/tables/{id}]
+
+Delete  a particular table name;
+
++ Response 200 (application/json)
+
+        {
+            "data": [
+            {
+                "id": 13,
+                "tableName": "2"
+            },
+            {
+                "id": 14,
+                "tableName": "3"
+            },
+            {
+                "id": 15,
+                "tableName": "4"
+            },
+            {   
+                "id": 16,
+                "tableName": "5"
+            }, 
+            {   
+                "id": 17,
+                "tableName": "6"
+            }
+            ]
+        }
+    
++ Response 404 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "You are trying to access menu not in database."
+            }
+        }
+     
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while updating menu."
+            }
+        }
+        
+## Menu API [/api/menus/{id}]
+
++ Parameters
+   + id (required)
+
+### List All Menus [GET/api/menus]
+
+
+To list all the menus.
+
++ Response 200 (application/json)
+
+        {
+        "data": [
+            {
+                "id": 1,
+                "foodName": "Plain Dosa",
+                "category": "Dosa",
+                "price": 30
+            },
+            {
+                "id": 2,
+                "foodName": "Masala Dosa",
+                "category": "Dosa",
+                "price": 60
+            },
+            {
+                "id": 3,
+                "foodName": "Ghee Dosa",
+                "category": "Dosa",
+                "price": 50
+            }
+            ]
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "You are trying to access a table not in database"
+            }
+        }
+        
+### Get a particular menu [GET/id/api/menus/{id}]
+
+To retrieve a particular menu
+
++ Response 200 (application/json)
+
+        {
+        "data": 
+            {
+                "id": 1,
+                "foodName": "Plain Dosa",
+                "category": "Dosa",
+                "price": 30
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "You are trying to access a menu not in database."
+            }
+        }
+    
+
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while retrieving menu from database."
+            }
+        }
+ 
+### Create a new Menu [POST/api/menus]
+
+
+We can also create a new table. It takes a JSON response and returns all tables as response.
+
++ Request 
+
+        {
+            "name" : "Chappathi",
+            "category" : "South Indian",
+            "price" : "50"
+        }
+
++ Response 200 (application/json)
+
+        {
+        "data": [
+            {
+                "id": 1,
+                "foodName": "Plain Dosa",
+                "category": "Dosa",
+                "price": 30
+            },
+            {
+                "id": 2,
+                "foodName": "Masala Dosa",
+                "category": "Dosa",
+                "price": 60
+            },
+            {
+                "id": 3,
+                "foodName": "Ghee Dosa",
+                "category": "Dosa",
+                "price": 50
+            },
+            {
+                "id": 4,
+                "foodName": "Chappathi",
+                "category": "South Indian",
+                "price": 50
+            }
+                
+            ]
+        }
+        
++ Response 422 (application/json)
+
+        {
+        "error": {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name field is required."
+                ]
+                }
+            }
+        }
+    
++ Response 422 (application/json)
+
+        {
+        "error": {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name has already been taken."
+                ]
+                }
+            }
+        }
+
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while retrieving menu from database"
+            }
+        }
+ 
+
+### Update a Menu [PUT/api/menus/{id}]
+
+We can also create a new table. It takes a JSON response and returns all tables as response.
+
++ Request 
+
+        {
+            "id" : "4"
+            "name" : "Idly",
+            "category" : "South Indian",
+            "price" : "50"
+        }
+
++ Response 200 (application/json)
+
+        {
+        "data": [
+            {
+                "id": 1,
+                "foodName": "Plain Dosa",
+                "category": "Dosa",
+                "price": 30
+            },
+            {
+                "id": 2,
+                "foodName": "Masala Dosa",
+                "category": "Dosa",
+                "price": 60
+            },
+            {
+                "id": 3,
+                "foodName": "Ghee Dosa",
+                "category": "Dosa",
+                "price": 50
+            },
+            {
+                "id": 4,
+                "foodName": "Idly",
+                "category": "South Indian",
+                "price": 50
+            }
+                
+            ]
+        }
+        
++ Response 422 (application/json)
+
+        {
+        "error": {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name field is required."
+                ]
+                }
+            }
+        }
+    
++ Response 422 (application/json)
+
+        {
+        "error": {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name has already been taken."
+                ]
+                }
+            }
+        }
+   
++ Response 404 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "You are trying to access menu not in database."
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while retrieving menu from database."
+            }
+        }
+ 
+            
+### Delete a Table [DELETE/api/menu/{id}]
+
+To delete a menu.
+
++ Response 200 (application/json)
+
+        {
+        "data": [
+            {
+                "id": 2,
+                "foodName": "Masala Dosa",
+                "category": "Dosa",
+                "price": 60
+            },
+            {
+                "id": 3,
+                "foodName": "Ghee Dosa",
+                "category": "Dosa",
+                "price": 50
+            },
+            {
+                "id": 4,
+                "foodName": "Chappathi",
+                "category": "South Indian",
+                "price": 50
+            }
+                
+            ]
+        }
+    
++ Response 404 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "You are trying to access a table not in database."
+            }
+        }
+
++ Response 500 (application/json)
+
+        {
+            "error": 
+            {
+                "message": "Some error occurred while retrieving menu from database."
+            }
+        }
