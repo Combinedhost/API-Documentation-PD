@@ -96,7 +96,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
 + Request 
 
         {
-            "table" : "6"
+            "name" : "6"
         }
 
 + Response 200 (application/json)
@@ -347,6 +347,12 @@ We can also create a new table. It takes a JSON response and returns all tables 
             "errors": {
                 "name": [
                     "The name field is required."
+                ],
+                "category": [
+                    "The category field is required."
+                ],
+                "price": [
+                    "The price field is required."
                 ]
                 }
             }
