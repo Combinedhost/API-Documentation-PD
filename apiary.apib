@@ -21,38 +21,35 @@ To list all the tables.
 
 + Response 200 (application/json)
 
-        {
-            "data": [
+       [
             {
                 "id": 12,
-                "tableName": "1"
+                "table_name": "1"
             },
             {
                 "id": 13,
-                "tableName": "2"
+                "table_name": "2"
             },
             {
                 "id": 14,
-                "tableName": "3"
+                "table_name": "3"
             },
             {
                 "id": 15,
-                "tableName": "4"
+                "table_name": "4"
             },
             {   
                 "id": 16,
-                "tableName": "5"
+                "table_name": "5"
             }
-         ]
-        }
+        ]
+    
 
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
-                "message": "Some error occurred while retrieving table from database."
-            }
+         
+            "message": "Some error occurred while retrieving table from database."
         }
         
 ### Get a particular table [GET/api/tables/{id}]
@@ -61,32 +58,25 @@ To retrieve a particular table
 
 + Response 200 (application/json)
 
+
         {
-            "data": 
-            {
-                "id": 12,
-                "tableName": "1"
-            }
+            "id": 12,
+            "table_name": "1"
         }
         
 
 + Response 404 (application/json)
 
         {
-            "error": 
-            {
-                "message": "You are trying to access a table not in database."
-            }
+            "message": "You are trying to access a table not in database."
         }
     
 
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
-                "message": "Some error occurred while retrieving table from database."
-            }
+
+            "message": "Some error occurred while retrieving table from database."
         }
       
 ### Create a new Table [POST/api/tables]
@@ -100,13 +90,73 @@ We can also create a new table. It takes a JSON response and returns all tables 
         }
 
 + Response 200 (application/json)
-
-        {
-            "data": [
+        
+        
+        [
             {
                 "id": 12,
-                "tableName": "1"
+                "table_name": "1"
             },
+            {
+                "id": 13,
+                "table_name": "2"
+            },
+            {
+                "id": 14,
+                "table_name": "3"
+            },
+            {
+                "id": 15,
+                "table_name": "4"
+            },
+            {   
+                "id": 16,
+                "table_name": "5"
+            }, 
+            {   
+                "id": 17,
+                "table_name": "6"
+            }
+        ]
+        }
+    
++ Response 422 (application/json)
+
+        {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name field is required."
+                ]
+            }
+        }
+    
++ Response 422 (application/json)
+
+        {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name has already been taken."
+                ]
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+
+            "message": "Some error occurred while creating table."
+        }
+        
+        
+### Delete a Table [DELETE/api/tables/{id}]
+
+Delete  a particular table name;
+
++ Response 200 (application/json)
+
+        [
             {
                 "id": 13,
                 "tableName": "2"
@@ -128,74 +178,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
                 "tableName": "6"
             }
         ]
-        }
-    
-+ Response 422 (application/json)
-
-        {
-        "error": {
-            "message": "Validation failed",
-            "errors": {
-                "name": [
-                    "The name field is required."
-                ]
-                }
-            }
-        }
-    
-+ Response 422 (application/json)
-
-        {
-        "error": {
-            "message": "Validation failed",
-            "errors": {
-                "name": [
-                    "The name has already been taken."
-                ]
-                }
-            }
-        }
         
-+ Response 500 (application/json)
-
-        {
-            "error": 
-            {
-                "message": "Some error occurred while creating table."
-            }
-        }
-        
-        
-### Delete a Table [DELETE/api/tables/{id}]
-
-Delete  a particular table name;
-
-+ Response 200 (application/json)
-
-        {
-            "data": [
-            {
-                "id": 13,
-                "tableName": "2"
-            },
-            {
-                "id": 14,
-                "tableName": "3"
-            },
-            {
-                "id": 15,
-                "tableName": "4"
-            },
-            {   
-                "id": 16,
-                "tableName": "5"
-            }, 
-            {   
-                "id": 17,
-                "tableName": "6"
-            }
-            ]
-        }
     
 + Response 404 (application/json)
 
@@ -209,10 +192,7 @@ Delete  a particular table name;
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
-                "message": "Some error occurred while updating menu."
-            }
+            "message": "Some error occurred while updating menu."
         }
         
 ## Menu API [/api/menus/{id}]
@@ -227,8 +207,7 @@ To list all the menus.
 
 + Response 200 (application/json)
 
-        {
-        "data": [
+        [
             {
                 "id": 1,
                 "foodName": "Plain Dosa",
@@ -247,16 +226,12 @@ To list all the menus.
                 "category": "Dosa",
                 "price": 50
             }
-            ]
-        }
+        ]
         
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
-                "message": "You are trying to access a table not in database"
-            }
+            "message": "You are trying to access a table not in database."
         }
         
 ### Get a particular menu [GET/id/api/menus/{id}]
@@ -265,33 +240,25 @@ To retrieve a particular menu
 
 + Response 200 (application/json)
 
-        {
-        "data": 
             {
                 "id": 1,
                 "foodName": "Plain Dosa",
                 "category": "Dosa",
                 "price": 30
             }
-        }
+
 
 + Response 404 (application/json)
 
         {
-            "error": 
-            {
-                "message": "You are trying to access a menu not in database."
-            }
+            "message": "You are trying to access a menu not in database."
         }
     
 
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
-                "message": "Some error occurred while retrieving menu from database."
-            }
+            "message": "Some error occurred while retrieving menu from database."
         }
  
 ### Create a new Menu [POST/api/menus]
@@ -309,40 +276,37 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 + Response 200 (application/json)
 
-        {
-        "data": [
+        [
             {
                 "id": 1,
-                "foodName": "Plain Dosa",
+                "food_name": "Plain Dosa",
                 "category": "Dosa",
                 "price": 30
             },
             {
                 "id": 2,
-                "foodName": "Masala Dosa",
+                "food_name": "Masala Dosa",
                 "category": "Dosa",
                 "price": 60
             },
             {
                 "id": 3,
-                "foodName": "Ghee Dosa",
+                "food_name": "Ghee Dosa",
                 "category": "Dosa",
                 "price": 50
             },
             {
                 "id": 4,
-                "foodName": "Chappathi",
+                "food_name": "Chappathi",
                 "category": "South Indian",
                 "price": 50
             }
                 
-            ]
-        }
+        ]
         
 + Response 422 (application/json)
 
         {
-        "error": {
             "message": "Validation failed",
             "errors": {
                 "name": [
@@ -354,30 +318,24 @@ We can also create a new table. It takes a JSON response and returns all tables 
                 "price": [
                     "The price field is required."
                 ]
-                }
             }
         }
     
 + Response 422 (application/json)
 
         {
-        "error": {
             "message": "Validation failed",
             "errors": {
                 "name": [
                     "The name has already been taken."
                 ]
-                }
             }
         }
 
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
-                "message": "Some error occurred while retrieving menu from database"
-            }
+            "message": "Some error occurred while retrieving menu from database."
         }
  
 
@@ -388,7 +346,6 @@ We can also create a new table. It takes a JSON response and returns all tables 
 + Request 
 
         {
-            "id" : "4"
             "name" : "Idly",
             "category" : "South Indian",
             "price" : "50"
@@ -396,8 +353,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 + Response 200 (application/json)
 
-        {
-        "data": [
+        [
             {
                 "id": 1,
                 "foodName": "Plain Dosa",
@@ -423,98 +379,79 @@ We can also create a new table. It takes a JSON response and returns all tables 
                 "price": 50
             }
                 
-            ]
-        }
+        ]
         
 + Response 422 (application/json)
 
         {
-        "error": {
             "message": "Validation failed",
             "errors": {
                 "name": [
                     "The name field is required."
                 ]
-                }
             }
         }
     
 + Response 422 (application/json)
 
         {
-        "error": {
             "message": "Validation failed",
             "errors": {
                 "name": [
                     "The name has already been taken."
                 ]
-                }
             }
         }
    
 + Response 404 (application/json)
 
         {
-            "error": 
-            {
                 "message": "You are trying to access menu not in database."
-            }
         }
         
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
                 "message": "Some error occurred while retrieving menu from database."
-            }
         }
  
             
-### Delete a Table [DELETE/api/menu/{id}]
+### Delete a Menu [DELETE/api/menu/{id}]
 
 To delete a menu.
 
 + Response 200 (application/json)
 
-        {
-        "data": [
+        [
             {
                 "id": 2,
-                "foodName": "Masala Dosa",
+                "food_name": "Masala Dosa",
                 "category": "Dosa",
                 "price": 60
             },
             {
                 "id": 3,
-                "foodName": "Ghee Dosa",
+                "food_name": "Ghee Dosa",
                 "category": "Dosa",
                 "price": 50
             },
             {
                 "id": 4,
-                "foodName": "Chappathi",
+                "food_name": "Chappathi",
                 "category": "South Indian",
                 "price": 50
             }
                 
-            ]
-        }
+        ]
     
 + Response 404 (application/json)
 
         {
-            "error": 
-            {
-                "message": "You are trying to access a table not in database."
-            }
+            "message": "You are trying to access a table not in database."
         }
 
 + Response 500 (application/json)
 
         {
-            "error": 
-            {
                 "message": "Some error occurred while retrieving menu from database."
-            }
         }
