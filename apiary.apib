@@ -453,5 +453,320 @@ To delete a menu.
 + Response 500 (application/json)
 
         {
-                "message": "Some error occurred while retrieving menu from database."
+            "message": "Some error occurred while retrieving menu from database."
+        }
+        
+        
+## Pending Order API [/api/pending-orders/{order-name}/tables/{table-name}]
+
++ Parameters
+   + order-name
+   + table-name 
+
+### List All Pending Orders [GET/api/pending-orders]
+
+To list all the pending orders.
+
+
+Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "table_name": "1",
+                "order_name": "gowtham",
+                "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+            },
+            {
+                "id": 2,
+                "table_name": "2",
+                "order_name": "gowtham",
+                "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+            },
+            {
+                "id": 3,
+                "table_name": "4",
+                "order_name": "naveen",
+                "order": {
+                    "dosa": 1,
+                    "idly": 2
+                }
+            }
+        ]
+                
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving pending orders from database."
+        }
+        
+### Get a particular order [GET/api/pending-orders/{order-name}]
+
+To retrieve a particular order
+
+
+Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/gowtham
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "table_name": "1",
+                "order_name": "gowtham",
+                "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+            },
+            {
+                "id": 2,
+                "table_name": "2",
+                "order_name": "gowtham",
+                "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+            }
+        ]
+ 
++ Response 404 (application/json)
+
+        {
+            "message": "You are trying to access a order not in database."
+        }
+    
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving pending orders from database."
+        }
+ 
+ 
+### Get a particular order under a particular table [GET /api/pending-orders/{order-name}/tables/{table-name}]
+
+To retrieve a particular order under a table
+
+
+Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/gowtham/tables/1
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "table_name": "1",
+                "order_name": "gowtham",
+                "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+            }
+        ]
+ 
++ Response 404 (application/json)
+
+        {
+            "message": "You are trying to access a order not in database."
+        }
+    
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving pending orders from database."
+        }
+ 
+### Create a new Pending Order [POST/api/pending-orders]
+
+
+We can also create a new table. It takes a JSON response and returns all tables as response.
+
++ Request 
+
+        {
+            "table_name": "1"
+            "order_name": "gowtham"
+            "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "table_name": "1",
+            "order_name": "gowtham",
+            "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+        }
+        
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "table_name": [
+                    "The table name field is required."
+                ],
+                "order_name": [
+                    "The order name field is required."
+                ],
+                "order": [
+                    "The order field is required."
+                ]
+            }
+        }       
+    
++ Response 422 (application/json)
+
+        {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name has already been taken."
+                ]
+            }
+        }
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving menu from database."
+        }
+ 
+
+### Update a Pending Order [PUT/api/pending-orders/{order-name}/tables/{table-name}]
+
+To update the pending order. Supply the new order in the parameter to the update request.
+The pending order will be updated and sent back.
+
++ Request 
+
+        {
+            "order":
+                {
+                "poori": 1
+                }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "table_name": "1",
+            "order_name": "gowtham",
+            "order": {
+                "dosa": 2,
+                "idly": 2,
+                "poori": 1
+            }
+        } 
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "order_name": [
+                    "Order not found in the database. Provide a valid Order name."
+                ],
+                "table_name": [
+                    "Order is not placed under the table."
+                ],
+                "order": [
+                    "The order field is required."
+                ]
+            }
+        }
+            
+   
++ Response 500 (application/json)
+
+        {
+                "message": "Some error occurred while updating order in database."
+        }
+ 
+            
+### Delete a PendingOrder from a particukar table[DELETE/api/pending-orders/{order-name}/tables/{table-name}]
+
+To delete a order from a particular table
+
++ Response 200 (application/json)
+
+        {
+            "message": "Order deleted successfully."
+        }
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "order_name": [
+                    "Order not found in the database. Provide a valid Order name."
+                ],
+                "table_name": [
+                    "Order is not placed under the table."
+                ]
+            }
+        }
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while deleting order from database."
+        }
+        
+### Delete a PendingOrder [DELETE/api/pending-orders/{order-name}]
+
+To delete a order from a particular table
+
++ Response 200 (application/json)
+
+        {
+            "message": "Order deleted successfully."
+        }
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "order_name": [
+                    "Order not found in the database. Provide a valid Order name."
+                ],
+            }
+        }
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while deleting order from database."
+        }
+
+### Delete all PendingOrders [DELETE/api/pending-orders]
+
+To delete a order from a particular table
+
++ Response 200 (application/json)
+
+        {
+            "message": "Order deleted successfully."
+        }
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred clearing pending orders."
         }
