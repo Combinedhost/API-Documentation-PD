@@ -770,3 +770,172 @@ To delete a order from a particular table
         {
             "message": "Some error occurred clearing pending orders."
         }
+        
+## Order API [/api/orders]
+
+
+### List All Orders [GET/api/orders]
+
+To list all the orders.
+
+
+Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "bill_no": "PD00001",
+                "date": "25-09-2019",
+                "time": "01-39 AM",
+                "discount": 100,
+                "amount": 1000,
+                "total": 1100,
+                "order": {
+                    "dosa": 1,
+                    "chappati": 2
+                }
+            },
+            {
+                "id": 2,
+                "bill_no": "PD00002",
+                "date": "26-10-2019",
+                "time": "05-54 AM",
+                "discount": 9,
+                "amount": 249,
+                "total": 240,
+                "order": {
+                    "dosa": 3,
+                    "idly": 5
+                }
+            }
+        ]
+                
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving orders from database."
+        }
+        
+### List All Orders Under a Particular Date [GET/api/orders]
+
+To list all the orders under a particular date.
+
+
+Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/?date=23-09-2019
+
++ Body
+
+        {
+            "date": "23-09-2019"
+        }
+        
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "bill_no": "PD00001",
+                "date": "25-09-2019",
+                "time": "01-39 AM",
+                "discount": 100,
+                "amount": 1000,
+                "total": 1100,
+                "order": {
+                    "dosa": 1,
+                    "chappati": 2
+                }
+            },
+            {
+                "id": 2,
+                "bill_no": "PD00002",
+                "date": "26-10-2019",
+                "time": "05-54 AM",
+                "discount": 9,
+                "amount": 249,
+                "total": 240,
+                "order": {
+                    "dosa": 3,
+                    "idly": 5
+                }
+            },
+            {
+                "id": 3,
+                "bill_no": "PD00003",
+                "date": "26-10-2019",
+                "time": "05-54 AM",
+                "discount": 50,
+                "amount": 500,
+                "total": 550,
+                "order": {
+                    "dosa": 1,
+                    "idly": 2
+                }
+            }
+        ]
+                
+
+                
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving orders from database."
+        }
+        
+
+
+### Create a new Pending Order [POST/api/orders]
+
+
+We can also create a new order. It takes a JSON response and returns all tables as response.
+
++ Request 
+
+        {
+            "order": {
+                "dosa":1,
+                "idly":2
+                },
+            "amount": 500
+            "total":550
+            "discount":50
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "table_name": "1",
+            "order_name": "gowtham",
+            "order": {
+                    "dosa": 2,
+                    "idly": 2,
+                }
+        }
+        
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "order": [
+                    "The order field is required."
+                ],
+                "amount": [
+                    "The amount field is required."
+                ],
+                "total": [
+                    "The total field is required."
+                ],
+                "discount": [
+                    "The discount field is required."
+                ]
+            }
+        }      
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving menu from database."
+        }
