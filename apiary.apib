@@ -605,13 +605,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
 + Response 200 (application/json)
 
         {
-            "id": 1,
-            "table_name": "1",
-            "order_name": "gowtham",
-            "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
+           "message": "Order created successfully."
         }
         
 + Response 422 (application/json)
@@ -666,14 +660,7 @@ The pending order will be updated and sent back.
 + Response 200 (application/json)
 
         {
-            "id": 1,
-            "table_name": "1",
-            "order_name": "gowtham",
-            "order": {
-                "dosa": 2,
-                "idly": 2,
-                "poori": 1
-            }
+            "message": "Order updated successfully"
         } 
 + Response 422 (application/json)
 
@@ -709,6 +696,8 @@ To delete a order from a particular table
         {
             "message": "Order deleted successfully."
         }
+        
+        
 + Response 422 (application/json)
 
         {
@@ -878,48 +867,9 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 1,
-                "bill_no": "PD00001",
-                "date": "25-09-2019",
-                "time": "01-39 AM",
-                "discount": 100,
-                "amount": 1000,
-                "total": 1100,
-                "order": {
-                    "dosa": 1,
-                    "chappati": 2
-                }
-            },
-            {
-                "id": 2,
-                "bill_no": "PD00002",
-                "date": "26-10-2019",
-                "time": "05-54 AM",
-                "discount": 9,
-                "amount": 249,
-                "total": 240,
-                "order": {
-                    "dosa": 3,
-                    "idly": 5
-                }
-            },
-            {
-                "id": 3,
-                "bill_no": "PD00003",
-                "date": "26-10-2019",
-                "time": "05-54 AM",
-                "discount": 50,
-                "amount": 500,
-                "total": 550,
-                "order": {
-                    "dosa": 1,
-                    "idly": 2
-                }
-            }
-        ]
-                
+        {
+            "message": Order created successfully.
+        }
 
                 
 
