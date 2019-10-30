@@ -846,6 +846,51 @@ Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/?date=23-0
                     "dosa": 1,
                     "chappati": 2
                 }
+            }
+        ]
+                
+
+                
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving orders from database."
+        }
+        
+
+
+### Create a new Order [POST/api/orders]
+
+
+We can also create a new order. It takes a JSON response and returns all tables as response.
+
++ Request 
+
+        {
+            "order": {
+                "dosa":1,
+                "idly":2
+                },
+            "amount": 500
+            "total":550
+            "discount":50
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "bill_no": "PD00001",
+                "date": "25-09-2019",
+                "time": "01-39 AM",
+                "discount": 100,
+                "amount": 1000,
+                "total": 1100,
+                "order": {
+                    "dosa": 1,
+                    "chappati": 2
+                }
             },
             {
                 "id": 2,
@@ -877,43 +922,7 @@ Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/?date=23-0
                 
 
                 
-+ Response 500 (application/json)
 
-        {
-            "message": "Some error occurred while retrieving orders from database."
-        }
-        
-
-
-### Create a new Pending Order [POST/api/orders]
-
-
-We can also create a new order. It takes a JSON response and returns all tables as response.
-
-+ Request 
-
-        {
-            "order": {
-                "dosa":1,
-                "idly":2
-                },
-            "amount": 500
-            "total":550
-            "discount":50
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "id": 1,
-            "table_name": "1",
-            "order_name": "gowtham",
-            "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
-        }
-        
 + Response 422 (application/json)
 
         {
@@ -938,4 +947,61 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
         {
             "message": "Some error occurred while retrieving menu from database."
+        }
+ 
+
+## Report API [/api/reports]
+
+### Get Data from ItemSalesReport [GET/api/reports/daily/items-count-details]
+
+
+We can also create a new order. It takes a JSON response and returns all tables as response.
+
++ Request 
+
+        {
+            "date": 27-10-2019
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "dosa": 4,
+                "idly": 7
+            }
+        ]
+                
+
+                
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "date": [
+                    "The date field is required."
+                ]
+            }
+        }
+        
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "date": [
+                    "The date does not match the format d-m-Y.",
+                    [
+                        "Date should not be greater than today"
+                    ]
+                ]
+            }
+        }
+        
+        
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while retrieving items report from database."
         }
