@@ -200,6 +200,31 @@ Delete  a particular table name;
 + Parameters
    + id (required)
 
+### Get Menu Filters [GET /api/menus/filters]
+
+To get filters for menus
+
++ Response 200 (application/json)
+
+        {
+            "type": [
+                {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                {
+                    "id": 2,
+                    "name": "Non Veg"
+                }
+            ],
+            "category": [
+                {
+                    "id": 1,
+                    "name": "Dosa"
+                }
+            ]
+        }
+        
 ### List All Menus [GET/api/menus]
 
 
@@ -209,25 +234,70 @@ To list all the menus.
 
         [
             {
-                "id": 1,
-                "foodName": "Plain Dosa",
-                "category": "Dosa",
+                "id": 4,
+                "food_name": "Chicken Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 2,
+                    "name": "Non Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": false,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 30
+            },
+            {
+                "id": 3,
+                "food_name": "Ghee Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": false,
+                    "evening": false,
+                    "morning": false,
+                    "afternoon": true
+                },
                 "price": 30
             },
             {
                 "id": 2,
-                "foodName": "Masala Dosa",
-                "category": "Dosa",
-                "price": 60
-            },
-            {
-                "id": 3,
-                "foodName": "Ghee Dosa",
-                "category": "Dosa",
-                "price": 50
+                "food_name": "Masala Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": true,
+                    "evening": false,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 30
             }
         ]
-        
+                
 + Response 500 (application/json)
 
         {
@@ -269,39 +339,104 @@ We can also create a new table. It takes a JSON response and returns all tables 
 + Request 
 
         {
-            "name" : "Chappathi",
-            "category" : "South Indian",
-            "price" : "50"
+            "name" : "fefj",
+            "price" : 34,
+            "status" : true,
+            "time_of_day" : {"night" : true,"morning" : true,"evening" : true,"afternoon" : false},
+            "category_id" : "1",
+            "category_name" : "",
+            "type_id" : "1",
+            "type_name" : "",
+            "description" : "test"
         }
 
 + Response 200 (application/json)
 
         [
             {
-                "id": 1,
-                "food_name": "Plain Dosa",
-                "category": "Dosa",
+                "id": 4,
+                "food_name": "Chicken Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 2,
+                    "name": "Non Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": false,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 30
+            },
+            {
+                "id": 3,
+                "food_name": "Ghee Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": false,
+                    "evening": false,
+                    "morning": false,
+                    "afternoon": true
+                },
                 "price": 30
             },
             {
                 "id": 2,
                 "food_name": "Masala Dosa",
-                "category": "Dosa",
-                "price": 60
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": true,
+                    "evening": false,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 30
             },
             {
-                "id": 3,
-                "food_name": "Ghee Dosa",
-                "category": "Dosa",
-                "price": 50
-            },
-            {
-                "id": 4,
-                "food_name": "Chappathi",
-                "category": "South Indian",
-                "price": 50
+                "id": 6,
+                "food_name": "fefj",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "test",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": true,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 34
             }
-                
         ]
         
 + Response 422 (application/json)
