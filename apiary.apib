@@ -1155,7 +1155,7 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
 ### Get Menu Settings [GET /api/settings/menu]
 
-+ Respose 200 (application/json)
++ Response 200 (application/json)
 
         {
             "apply": true,
@@ -1181,25 +1181,25 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
 + Request 
 
-        {
-            "apply": true,
-            "morning": {
-                "from": "06:00 AM",
-                "to": "08:00 AM"
-            },
-            "afternoon": {
-                "from": "12:01 PM",
-                "to": "03:30 PM"
-            },
-            "evening": {
-                "from": "05:00 PM",
-                "to": "06:00 PM"
-            },
-            "night": {
-                "from": "07:00 PM",
-                "to": "10:00 PM"
+            {
+                "apply": true,
+                "morning": {
+                    "from": "06:00 AM",
+                    "to": "08:00 AM"
+                },
+                "afternoon": {
+                    "from": "12:01 PM",
+                    "to": "03:30 PM"
+                },
+                "evening": {
+                    "from": "05:00 PM",
+                    "to": "06:00 PM"
+                },
+                "night": {
+                    "from": "07:00 PM",
+                    "to": "10:00 PM"
+                }
             }
-        }
 
 + Response 200 (application/json)
 
