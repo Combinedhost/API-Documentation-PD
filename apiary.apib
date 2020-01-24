@@ -1150,3 +1150,59 @@ We can also create a new order. It takes a JSON response and returns all tables 
         {
             "message" : "Feedback submitted successgully"
         }
+        
+## Setings API [/api/settings]
+
+### Get Menu Settings [GET /api/settings/menu]
+
++ Respose 200 (application/json)
+
+        {
+            "apply": true,
+            "morning": {
+                "from": "07:00 AM",
+                "to": "08:00 AM"
+            },
+            "afternoon": {
+                "from": "11:55 AM",
+                "to": "03:30 PM"
+            },
+            "evening": {
+                "from": "05:00 PM",
+                "to": "06:00 PM"
+            },
+            "night": {
+                "from": "07:00 PM",
+                "to": "11:00 PM"
+            }
+        }
+        
+### Update Menu Settings [POST /api/settings/menu]
+
++ Request 
+
+        {
+            "apply": true,
+            "morning": {
+                "from": "06:00 AM",
+                "to": "08:00 AM"
+            },
+            "afternoon": {
+                "from": "12:01 PM",
+                "to": "03:30 PM"
+            },
+            "evening": {
+                "from": "05:00 PM",
+                "to": "06:00 PM"
+            },
+            "night": {
+                "from": "07:00 PM",
+                "to": "10:00 PM"
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Menu settings updated successfully."
+        }
