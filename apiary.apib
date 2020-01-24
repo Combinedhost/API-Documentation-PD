@@ -10,6 +10,129 @@ Note : Refer to the url in the production for our purpose
 
 Order Taking System used to sync orders between various phones
 
+## Auth API [/api]
+
+### Login API [POST /api/login]
+
+Send a login request to the server with the credentials
+
++ Attributes
+   + email (string, required) - Input should be of Email format. 
+   + password (string, required) - Password should be greater than 8 characters. 
+
+
++ Request (application/json)
+
+    + Headers
+
+            X-Requested-With: XMLHttpRequest
+    
+    + Body 
+    
+            {
+                "email": "gowthampranesh007@gmail.com",
+                "desciption": "12345678"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "data": {
+            "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTYwNzQ2LCJleHAiOjE1NjcxNjQzNDYsIm5iZiI6MTU2NzE2MDc0NiwianRpIjoicDNQcVlRa3kwWmJqUkpMaCIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.UxwJnoDVbHxNDuCpMTCXXITeYx_Cpx72wUWf-J27xGY",
+            "token_type": "bearer",
+            "expires_in": 3600
+            }
+        }
+
++ Response 419 (application/json)
+
+        {  
+            "error":{  
+                "message":"Credentials are invalid"
+            }
+        }
+
++ Response 422 (application/json)
+
+        {  
+            "message":"The given data was invalid.",
+            "errors": {  
+                "email": [  
+                    "The email must be a valid email address."
+                ],
+                "password": [   
+                    "The password must be at least 8 characters."
+                ]
+            }
+        }
+        
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "email": [
+                    "The email field is required."
+                ],
+                "password": [
+                    "The password field is required."
+                ]
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "error" : {
+                "message" : "Oops! Some error occurred in the server"
+            }
+        }
+
+### Logout [POST /api/logout]]
+
+Send a logout request to the server with the token
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            X-Requested-With: XMLHttpRequest
+
+
+
++ Response 200 (application/json)
+
+        {
+            "message": "Successfully logged out"
+        }
+
++ Response 419 (application/json)
+    
+            {
+            "error": {
+                "message": "Token is Invalid"
+                }
+            }
+
++ Response 419 (application/json)
+    
+            {
+                "error": {
+                    "message": "Token is Expired"
+                }
+            }
+            
++ Response 500 (application/json)
+
+        {
+            "error": {
+                "message": "Authorisation token not found"
+                }
+        }
+
+
+
 ## Table API [/api/tables/{id}]
 
 + Parameters
@@ -480,40 +603,106 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 + Request 
 
+
         {
-            "name" : "Idly",
-            "category" : "South Indian",
-            "price" : "50"
+            "name" : "fefj",
+            "price" : 34,
+            "status" : true,
+            "time_of_day" : {"night" : true,"morning" : true,"evening" : true,"afternoon" : false},
+            "category_id" : "1",
+            "category_name" : "",
+            "type_id" : "1",
+            "type_name" : "",
+            "description" : "test"
         }
 
 + Response 200 (application/json)
 
-        [
+          [
             {
-                "id": 1,
-                "foodName": "Plain Dosa",
-                "category": "Dosa",
+                "id": 4,
+                "food_name": "Chicken Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 2,
+                    "name": "Non Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": false,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 30
+            },
+            {
+                "id": 3,
+                "food_name": "Ghee Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": false,
+                    "evening": false,
+                    "morning": false,
+                    "afternoon": true
+                },
                 "price": 30
             },
             {
                 "id": 2,
-                "foodName": "Masala Dosa",
-                "category": "Dosa",
-                "price": 60
+                "food_name": "Masala Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": true,
+                    "evening": false,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 30
             },
             {
-                "id": 3,
-                "foodName": "Ghee Dosa",
-                "category": "Dosa",
-                "price": 50
-            },
-            {
-                "id": 4,
-                "foodName": "Idly",
-                "category": "South Indian",
-                "price": 50
+                "id": 6,
+                "food_name": "fefj",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "test",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": true,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 34
             }
-                
         ]
         
 + Response 422 (application/json)
@@ -559,24 +748,68 @@ To delete a menu.
 
         [
             {
-                "id": 2,
-                "food_name": "Masala Dosa",
-                "category": "Dosa",
-                "price": 60
-            },
-            {
                 "id": 3,
                 "food_name": "Ghee Dosa",
-                "category": "Dosa",
-                "price": 50
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": false,
+                    "evening": false,
+                    "morning": false,
+                    "afternoon": true
+                },
+                "price": 30
             },
             {
-                "id": 4,
-                "food_name": "Chappathi",
-                "category": "South Indian",
-                "price": 50
+                "id": 2,
+                "food_name": "Masala Dosa",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "Description",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": true,
+                    "evening": false,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 30
+            },
+            {
+                "id": 6,
+                "food_name": "fefj",
+                "category": {
+                    "id": 1,
+                    "name": "Dosa"
+                },
+                "description": "test",
+                "type": {
+                    "id": 1,
+                    "name": "Veg"
+                },
+                "status": true,
+                "time_of_day": {
+                    "night": true,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": false
+                },
+                "price": 34
             }
-                
         ]
     
 + Response 404 (application/json)
@@ -598,130 +831,62 @@ To delete a menu.
    + order-name
    + table-name 
 
-### List All Pending Orders [GET/api/pending-orders]
+### Pending Orders List[GET/api/pending-orders]
 
-To list all the pending orders.
+To list all the pending orders with filter
 
 
 Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/
 
++ Request 
+
+            {
+                "table_name" : 1,
+                "order_name" : "test",
+                "filter" : "today",
+                "Status" : "completed"
+            }
+            
 + Response 200 (application/json)
 
         [
             {
+                "id": 2,
+                "table_name": "1",
+                "order_name": "full",
+                "order": "[{\"price\": 30.0, \"item_id\": 7, \"quantity\": 3, \"item_name\": \"Chicken Briyani\", \"category_id\": 0}]",
+                "status": "pending",
+                "date": "22-01-2020",
+                "time": "06-25 AM"
+            },
+            {
                 "id": 1,
                 "table_name": "1",
-                "order_name": "gowtham",
-                "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
-            },
-            {
-                "id": 2,
-                "table_name": "2",
-                "order_name": "gowtham",
-                "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
-            },
-            {
-                "id": 3,
-                "table_name": "4",
-                "order_name": "naveen",
-                "order": {
-                    "dosa": 1,
-                    "idly": 2
-                }
+                "order_name": "tedt",
+                "order": "[{\"price\": 30.0, \"item_id\": 3, \"quantity\": 3, \"item_name\": \"Ghee Dosa\", \"category_id\": 0}]",
+                "status": "pending",
+                "date": "15-01-2020",
+                "time": "12-53 PM"
             }
         ]
-                
+                        
 + Response 500 (application/json)
 
         {
             "message": "Some error occurred while retrieving pending orders from database."
         }
         
-### Get a particular order [GET/api/pending-orders/{order-name}]
 
-To retrieve a particular order
+### Get all pending order names [GET /api/pending-order/get-all-names/]
 
-
-Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/gowtham
-
-+ Response 200 (application/json)
++ Response 200(application/json)
 
         [
-            {
-                "id": 1,
-                "table_name": "1",
-                "order_name": "gowtham",
-                "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
-            },
-            {
-                "id": 2,
-                "table_name": "2",
-                "order_name": "gowtham",
-                "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
-            }
+            "tedt",
+            "full"
         ]
- 
-+ Response 404 (application/json)
-
-        {
-            "message": "You are trying to access a order not in database."
-        }
-    
-
-+ Response 500 (application/json)
-
-        {
-            "message": "Some error occurred while retrieving pending orders from database."
-        }
- 
- 
-### Get a particular order under a particular table [GET /api/pending-orders/{order-name}/tables/{table-name}]
-
-To retrieve a particular order under a table
-
-
-Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/gowtham/tables/1
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "id": 1,
-                "table_name": "1",
-                "order_name": "gowtham",
-                "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
-            }
-        ]
- 
-+ Response 404 (application/json)
-
-        {
-            "message": "You are trying to access a order not in database."
-        }
-    
-
-+ Response 500 (application/json)
-
-        {
-            "message": "Some error occurred while retrieving pending orders from database."
-        }
- 
-### Create a new Pending Order [POST/api/pending-orders]
+        
+### Create a new Pending Order [POST /api/pending-orders]
 
 
 We can also create a new table. It takes a JSON response and returns all tables as response.
@@ -731,10 +896,14 @@ We can also create a new table. It takes a JSON response and returns all tables 
         {
             "table_name": "1"
             "order_name": "gowtham"
-            "order": {
-                    "dosa": 2,
-                    "idly": 2,
-                }
+            "order": [
+                    {
+                        "item_id":2,
+                        "quantity":2,
+                        "price": 30,
+                        "item_name": "Plain Dosa"
+                    }
+                ]    
         }
 
 + Response 200 (application/json)
@@ -760,16 +929,6 @@ We can also create a new table. It takes a JSON response and returns all tables 
             }
         }       
     
-+ Response 422 (application/json)
-
-        {
-            "message": "Validation failed",
-            "errors": {
-                "name": [
-                    "The name has already been taken."
-                ]
-            }
-        }
 
 + Response 500 (application/json)
 
@@ -778,85 +937,17 @@ We can also create a new table. It takes a JSON response and returns all tables 
         }
  
 
-### Update a Pending Order [PUT/api/pending-orders/{order-name}/tables/{table-name}]
-
-To update the pending order. Supply the new order in the parameter to the update request.
-The pending order will be updated and sent back.
-
-+ Request 
-
-        {
-            "order":
-                {
-                "poori": 1
-                }
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "message": "Order updated successfully"
-        } 
-+ Response 422 (application/json)
-
-        {
-            "message": "The given data was invalid.",
-            "errors": {
-                "order_name": [
-                    "Order not found in the database. Provide a valid Order name."
-                ],
-                "table_name": [
-                    "Order is not placed under the table."
-                ],
-                "order": [
-                    "The order field is required."
-                ]
-            }
-        }
-            
-   
-+ Response 500 (application/json)
-
-        {
-                "message": "Some error occurred while updating order in database."
-        }
- 
-            
-### Delete a PendingOrder from a particukar table[DELETE/api/pending-orders/{order-name}/tables/{table-name}]
+### Delete a PendingOrder [DELETE/api/pending-orders]
 
 To delete a order from a particular table
 
-+ Response 200 (application/json)
++ Request (application/json)
 
-        {
-            "message": "Order deleted successfully."
-        }
-        
-        
-+ Response 422 (application/json)
-
-        {
-            "message": "The given data was invalid.",
-            "errors": {
-                "order_name": [
-                    "Order not found in the database. Provide a valid Order name."
-                ],
-                "table_name": [
-                    "Order is not placed under the table."
-                ]
+            {
+                "table_name" : 1,
+                "order_name" : "test",
             }
-        }
-
-+ Response 500 (application/json)
-
-        {
-            "message": "Some error occurred while deleting order from database."
-        }
-        
-### Delete a PendingOrder [DELETE/api/pending-orders/{order-name}]
-
-To delete a order from a particular table
-
+            
 + Response 200 (application/json)
 
         {
@@ -879,22 +970,6 @@ To delete a order from a particular table
             "message": "Some error occurred while deleting order from database."
         }
 
-### Delete all PendingOrders [DELETE/api/pending-orders]
-
-To delete a order from a particular table
-
-+ Response 200 (application/json)
-
-        {
-            "message": "Order deleted successfully."
-        }
-
-+ Response 500 (application/json)
-
-        {
-            "message": "Some error occurred clearing pending orders."
-        }
-        
 ## Order API [/api/orders]
 
 
@@ -905,35 +980,36 @@ To list all the orders.
 
 Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/
 
++ Request (application/json)
+
+            {
+                "date" : "02-07-18"
+            }
+    
+
 + Response 200 (application/json)
 
-        [
+      [
             {
                 "id": 1,
-                "bill_no": "PD00001",
-                "date": "25-09-2019",
-                "time": "01-39 AM",
-                "discount": 100,
-                "amount": 1000,
-                "total": 1100,
-                "order": {
-                    "dosa": 1,
-                    "chappati": 2
-                }
+                "bill_no": "1",
+                "date": "02-07-2018",
+                "time": "01-37 PM",
+                "discount": 15,
+                "amount": null,
+                "total": 232,
+                "order": "[{\"cat_id\": 1, \"item_id\": 2, \"type_id\": 1, \"quantity\": 2}, {\"cat_id\": 1, \"item_id\": 4, \"type_id\": 2, \"quantity\": 2}]"
             },
             {
                 "id": 2,
-                "bill_no": "PD00002",
-                "date": "26-10-2019",
-                "time": "05-54 AM",
-                "discount": 9,
-                "amount": 249,
-                "total": 240,
-                "order": {
-                    "dosa": 3,
-                    "idly": 5
-                }
-            }
+                "bill_no": "2",
+                "date": "02-07-2018",
+                "time": "01-37 PM",
+                "discount": 17,
+                "amount": null,
+                "total": 692,
+                "order": "[{\"cat_id\": 1, \"item_id\": 3, \"type_id\": 1, \"quantity\": 3}, {\"cat_id\": 1, \"item_id\": 3, \"type_id\": 2, \"quantity\": 5}]"
+            },
         ]
                 
 + Response 500 (application/json)
@@ -942,46 +1018,6 @@ Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/
             "message": "Some error occurred while retrieving orders from database."
         }
         
-### List All Orders Under a Particular Date [GET/api/orders]
-
-To list all the orders under a particular date.
-
-
-Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/?date=23-09-2019
-
-+ Body
-
-        {
-            "date": "23-09-2019"
-        }
-        
-+ Response 200 (application/json)
-
-        [
-            {
-                "id": 1,
-                "bill_no": "PD00001",
-                "date": "25-09-2019",
-                "time": "01-39 AM",
-                "discount": 100,
-                "amount": 1000,
-                "total": 1100,
-                "order": {
-                    "dosa": 1,
-                    "chappati": 2
-                }
-            }
-        ]
-                
-
-                
-+ Response 500 (application/json)
-
-        {
-            "message": "Some error occurred while retrieving orders from database."
-        }
-        
-
 
 ### Create a new Order [POST/api/orders]
 
@@ -991,11 +1027,17 @@ We can also create a new order. It takes a JSON response and returns all tables 
 + Request 
 
         {
-            "order": {
-                "dosa":1,
-                "idly":2
+            "order": [
+                {
+                    "item_name":"Mutton Biryani",
+                    "item_id": 1,
+                    "category_id" : 1,
+                    "type_id" : 1,
+                    "price":"120",
+                    "quantity":1
                 },
-            "amount": 500
+            ],
+            "sub_total": 500
             "total":550
             "discount":50
         }
@@ -1017,7 +1059,7 @@ We can also create a new order. It takes a JSON response and returns all tables 
                     "The order field is required."
                 ],
                 "amount": [
-                    "The amount field is required."
+                    "The sub_total field is required."
                 ],
                 "total": [
                     "The total field is required."
@@ -1089,4 +1131,22 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
         {
             "message": "Some error occurred while retrieving items report from database."
+        }
+        
+## Feedback API [/api/admin-feedback]
+
+### Feedback API [POST]
+
++ Request (application/json)
+
+        {
+            "type" : "issue",
+            "title" : "test",
+            "description" : test"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "message" : "Feedback submitted successgully"
         }
