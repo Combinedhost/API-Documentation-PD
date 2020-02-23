@@ -1206,3 +1206,65 @@ We can also create a new order. It takes a JSON response and returns all tables 
         {
             "message": "Menu settings updated successfully."
         }
+        
+## Mealee Landing Page [/api/]
+
+### Contact [POST /api/website-contact]
+
++ Request 
+
+            {
+                "name": "xyz",
+                "email": "zyz@gmail.com"
+                "subject": "test",
+                "message": "test"
+            }
+    
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "name": [
+                    "The name field is required."
+                ],
+                "email": [
+                    "The email field is required."
+                ],
+                "message": [
+                    "The message field is required."
+                ]
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Contact form submitted successfully."
+        }
+        
+
+### Contact [POST /api/website-subscribe]
+
++ Request 
+
+            {
+                "email": "zyz@gmail.com"
+            }
+    
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "email": [
+                    "The email field is required."
+                ]
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Email subscription successfull."
+        }
