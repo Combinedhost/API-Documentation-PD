@@ -1,6 +1,6 @@
 FORMAT: 1A
 
-HOST:  http://pd-testing.us-west-2.elasticbeanstalk.com
+HOST:  http://staging-hotel-app.us-west-2.elasticbeanstalk.com
 
 # Order Taking System
 
@@ -28,12 +28,61 @@ Send a login request to the server with the credentials
             X-Requested-With: XMLHttpRequest
     
     + Body 
-    
-            {
-                "email": "gowthampranesh007@gmail.com",
-                "desciption": "12345678"
-            }
 
+            {
+                "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktdGVzdGluZy1tZWFsZWUubGF5b3J6LmNvbVwvXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTg0NzgzOTI3LCJleHAiOjE1ODQ3OTgzMjcsIm5iZiI6MTU4NDc4MzkyNywianRpIjoiRkhhS0VNTVVxTUhSc2VudyIsInN1YiI6NywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.06kAL_o3zBEBI3Xj54FZztkxgE7O1hYqdvIRgKR1bEc",
+                "token_type":"bearer",
+                "expires_in":14400,
+                "roles":[
+                    "admin",
+                    "branch_admin"
+                ],
+                "permissions":[
+                    "view_menu",
+                    "view_menu",
+                    "create_menu",
+                    "create_menu",
+                    "update_menu",
+                    "update_menu",
+                    "delete_menu",
+                    "delete_menu",
+                    "create_pending_order",
+                    "create_pending_order",
+                    "update_pending_order",
+                    "update_pending_order",
+                    "delete_pending_order",
+                    "delete_pending_order",
+                    "create_order",
+                    "create_order",
+                    "update_order",
+                    "delete_order",
+                    "generate_sales_report",
+                    "generate_sales_report",
+                    "view_order",
+                    "view_order"
+                ],
+                "name":"Test",
+                "bill_slug":"TE",
+                "company":{
+                    "name":"TEst",
+                    "address1":"Test",
+                    "address2":"Test",
+                    "city":"Ariyalur",
+                    "state":"TamilNadu",
+                    "country":"India",
+                    "phone_no":"9090909090"
+                },
+                "branch":{
+                    "name":"TEst",
+                    "address1":"Test",
+                    "address2":"Test",
+                    "city":"Ariyalur",
+                    "state":"TamilNadu",
+                    "country":"India",
+                    "phone_no":"9090909090"
+                }
+            }
+            
 + Response 200 (application/json)
 
         {
@@ -107,7 +156,7 @@ Send a logout request to the server with the token
             "message": "Successfully logged out"
         }
 
-+ Response 419 (application/json)
++ Response 400 (application/json)
     
             {
             "error": {
@@ -115,7 +164,7 @@ Send a logout request to the server with the token
                 }
             }
 
-+ Response 419 (application/json)
++ Response 400 (application/json)
     
             {
                 "error": {
@@ -144,29 +193,36 @@ To list all the tables.
 
 + Response 200 (application/json)
 
-       [
+         [
             {
-                "id": 12,
+                "id": 40,
+                "table_name": "A1"
+            },
+            {
+                "id": 7,
                 "table_name": "1"
             },
             {
-                "id": 13,
+                "id": 8,
                 "table_name": "2"
             },
             {
-                "id": 14,
+                "id": 9,
                 "table_name": "3"
             },
             {
-                "id": 15,
+                "id": 10,
                 "table_name": "4"
             },
-            {   
-                "id": 16,
+            {
+                "id": 38,
                 "table_name": "5"
+            },
+            {
+                "id": 39,
+                "table_name": "11"
             }
         ]
-    
 
 + Response 500 (application/json)
 
@@ -213,35 +269,41 @@ We can also create a new table. It takes a JSON response and returns all tables 
         }
 
 + Response 200 (application/json)
-        
-        
+
         [
             {
-                "id": 12,
+                "id": 40,
+                "table_name": "A1"
+            },
+            {
+                "id": 7,
                 "table_name": "1"
             },
             {
-                "id": 13,
+                "id": 8,
                 "table_name": "2"
             },
             {
-                "id": 14,
+                "id": 9,
                 "table_name": "3"
             },
             {
-                "id": 15,
+                "id": 10,
                 "table_name": "4"
             },
-            {   
-                "id": 16,
+            {
+                "id": 38,
                 "table_name": "5"
-            }, 
-            {   
-                "id": 17,
-                "table_name": "6"
+            },
+            {
+                "id": 39,
+                "table_name": "11"
+            },
+            {
+                "id": 47,
+                "table_name": "12"
             }
         ]
-        }
     
 + Response 422 (application/json)
 
@@ -279,29 +341,36 @@ Delete  a particular table name;
 
 + Response 200 (application/json)
 
-        [
+         [
             {
-                "id": 13,
-                "tableName": "2"
+                "id": 40,
+                "table_name": "A1"
             },
             {
-                "id": 14,
-                "tableName": "3"
+                "id": 7,
+                "table_name": "1"
             },
             {
-                "id": 15,
-                "tableName": "4"
+                "id": 8,
+                "table_name": "2"
             },
-            {   
-                "id": 16,
-                "tableName": "5"
-            }, 
-            {   
-                "id": 17,
-                "tableName": "6"
+            {
+                "id": 9,
+                "table_name": "3"
+            },
+            {
+                "id": 10,
+                "table_name": "4"
+            },
+            {
+                "id": 38,
+                "table_name": "5"
+            },
+            {
+                "id": 47,
+                "table_name": "12"
             }
         ]
-        
     
 + Response 404 (application/json)
 
@@ -332,18 +401,26 @@ To get filters for menus
         {
             "type": [
                 {
-                    "id": 1,
+                    "id": 7,
                     "name": "Veg"
                 },
                 {
-                    "id": 2,
-                    "name": "Non Veg"
+                    "id": 14,
+                    "name": "Non veg"
                 }
             ],
             "category": [
                 {
-                    "id": 1,
+                    "id": 12,
                     "name": "Dosa"
+                },
+                {
+                    "id": 40,
+                    "name": "Briyani"
+                },
+                {
+                    "id": 41,
+                    "name": "Soup"
                 }
             ]
         }
@@ -357,67 +434,130 @@ To list all the menus.
 
         [
             {
-                "id": 4,
-                "food_name": "Chicken Dosa",
+                "id": 76,
+                "food_name": "Chicken Sweet Corn Soup",
                 "category": {
-                    "id": 1,
-                    "name": "Dosa"
+                    "id": 41,
+                    "name": "Soup"
                 },
-                "description": "Description",
+                "description": null,
                 "type": {
-                    "id": 2,
-                    "name": "Non Veg"
+                    "id": 14,
+                    "name": "Non veg"
                 },
-                "status": true,
-                "time_of_day": {
-                    "night": false,
-                    "evening": true,
-                    "morning": true,
-                    "afternoon": false
-                },
-                "price": 30
-            },
-            {
-                "id": 3,
-                "food_name": "Ghee Dosa",
-                "category": {
-                    "id": 1,
-                    "name": "Dosa"
-                },
-                "description": "Description",
-                "type": {
-                    "id": 1,
-                    "name": "Veg"
-                },
-                "status": true,
+                "status": false,
                 "time_of_day": {
                     "night": false,
                     "evening": false,
-                    "morning": false,
+                    "morning": true,
                     "afternoon": true
                 },
-                "price": 30
+                "price": 100
             },
             {
-                "id": 2,
-                "food_name": "Masala Dosa",
+                "id": 17,
+                "food_name": "Dosa",
                 "category": {
-                    "id": 1,
+                    "id": 12,
                     "name": "Dosa"
                 },
-                "description": "Description",
+                "description": null,
                 "type": {
-                    "id": 1,
+                    "id": 7,
                     "name": "Veg"
                 },
-                "status": true,
+                "status": false,
                 "time_of_day": {
                     "night": true,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": true
+                },
+                "price": 40
+            },
+            {
+                "id": 74,
+                "food_name": "Gowtham",
+                "category": {
+                    "id": 12,
+                    "name": "Dosa"
+                },
+                "description": null,
+                "type": {
+                    "id": 7,
+                    "name": "Veg"
+                },
+                "status": false,
+                "time_of_day": {
+                    "night": true,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": true
+                },
+                "price": 50
+            },
+            {
+                "id": 75,
+                "food_name": "Special Chicken Briyani",
+                "category": {
+                    "id": 40,
+                    "name": "Briyani"
+                },
+                "description": null,
+                "type": {
+                    "id": 14,
+                    "name": "Non veg"
+                },
+                "status": false,
+                "time_of_day": {
+                    "night": false,
                     "evening": false,
                     "morning": true,
                     "afternoon": false
                 },
-                "price": 30
+                "price": 200
+            },
+            {
+                "id": 77,
+                "food_name": "Veg sweet corn soup",
+                "category": {
+                    "id": 41,
+                    "name": "Soup"
+                },
+                "description": null,
+                "type": {
+                    "id": 7,
+                    "name": "Veg"
+                },
+                "status": false,
+                "time_of_day": {
+                    "night": false,
+                    "evening": false,
+                    "morning": true,
+                    "afternoon": true
+                },
+                "price": 50
+            },
+            {
+                "id": 18,
+                "food_name": "yvygu",
+                "category": {
+                    "id": 12,
+                    "name": "Dosa"
+                },
+                "description": null,
+                "type": {
+                    "id": 7,
+                    "name": "Veg"
+                },
+                "status": false,
+                "time_of_day": {
+                    "night": true,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": true
+                },
+                "price": 90
             }
         ]
                 
@@ -434,11 +574,26 @@ To retrieve a particular menu
 + Response 200 (application/json)
 
             {
-                "id": 1,
-                "foodName": "Plain Dosa",
-                "category": "Dosa",
-                "price": 30
-            }
+                "id": 18,
+                "food_name": "yvygu",
+                "category": {
+                    "id": 12,
+                    "name": "Dosa"
+                },
+                "description": null,
+                "type": {
+                    "id": 7,
+                    "name": "Veg"
+                },
+                "status": false,
+                "time_of_day": {
+                    "night": true,
+                    "evening": true,
+                    "morning": true,
+                    "afternoon": true
+                },
+                "price": 90
+            } 
 
 
 + Response 404 (application/json)
@@ -841,32 +996,29 @@ Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/
 + Request 
 
             {
-                "table_name" : 1,
-                "order_name" : "test",
-                "filter" : "today",
-                "Status" : "completed"
+                "date" : "07-03-2020"
             }
             
 + Response 200 (application/json)
 
         [
             {
-                "id": 2,
+                "id": 57,
                 "table_name": "1",
-                "order_name": "full",
-                "order": "[{\"price\": 30.0, \"item_id\": 7, \"quantity\": 3, \"item_name\": \"Chicken Briyani\", \"category_id\": 0}]",
+                "order_name": "gowtham",
+                "order": "[{\"price\": 40.0, \"item_id\": 17, \"type_id\": 7, \"quantity\": 1, \"item_name\": \"Dosa\", \"category_id\": 12}, {\"price\": 50.0, \"item_id\": 74, \"type_id\": 7, \"quantity\": 3, \"item_name\": \"Gowtham\", \"category_id\": 12}, {\"price\": 200.0, \"item_id\": 75, \"type_id\": 14, \"quantity\": 4, \"item_name\": \"Special Chicken Briyani\", \"category_id\": 40}]",
                 "status": "pending",
-                "date": "22-01-2020",
-                "time": "06-25 AM"
+                "date": "21-03-2020",
+                "time": "03-44 PM"
             },
             {
-                "id": 1,
+                "id": 56,
                 "table_name": "1",
-                "order_name": "tedt",
-                "order": "[{\"price\": 30.0, \"item_id\": 3, \"quantity\": 3, \"item_name\": \"Ghee Dosa\", \"category_id\": 0}]",
+                "order_name": "gowtham",
+                "order": "[{\"price\": 40.0, \"item_id\": 17, \"type_id\": 7, \"quantity\": 1, \"item_name\": \"Dosa\", \"category_id\": 12}, {\"price\": 50.0, \"item_id\": 74, \"type_id\": 7, \"quantity\": 3, \"item_name\": \"Gowtham\", \"category_id\": 12}, {\"price\": 200.0, \"item_id\": 75, \"type_id\": 14, \"quantity\": 4, \"item_name\": \"Special Chicken Briyani\", \"category_id\": 40}]",
                 "status": "pending",
-                "date": "15-01-2020",
-                "time": "12-53 PM"
+                "date": "21-03-2020",
+                "time": "03-44 PM"
             }
         ]
                         
@@ -1079,7 +1231,7 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
 ## Report API [/api/reports]
 
-### Get Data from ItemSalesReport [GET/api/reports/daily/items-count-details]
+### Get Data from ItemSalesReport [GET/api/reports/daily/sales-report]
 
 
 We can also create a new order. It takes a JSON response and returns all tables as response.
@@ -1092,12 +1244,43 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
 + Response 200 (application/json)
 
-        [
-            {
-                "dosa": 4,
-                "idly": 7
+        {
+            "order_details": [
+                {
+                    "id": 1,
+                    "bill_no": "1",
+                    "date": "31-05-2017",
+                    "time": "06-02 AM",
+                    "discount": 9,
+                    "sub_total": 224,
+                    "total": 215,
+                    "order": "[{\"cat_id\": 1, \"item_id\": 1, \"type_id\": 2, \"quantity\": 3}]"
+                },
+                {
+                    "id": 2,
+                    "bill_no": "2",
+                    "date": "31-05-2017",
+                    "time": "06-02 AM",
+                    "discount": 8,
+                    "sub_total": 586,
+                    "total": 578,
+                    "order": "[{\"cat_id\": 1, \"item_id\": 1, \"type_id\": 1, \"quantity\": 6}]"
+                },
+            ],
+            "items_count": {
+                "Plain Dosa": "9",
+                "Masala Dosa": "13",
+                "Ghee Dosa": "14",
+                "Chicken Dosa": "4"
+            },
+            "category_count": {
+                "Dosa": "40"
+            },
+            "type_details": {
+                "Veg": "22",
+                "Non Veg": "18"
             }
-        ]
+        }
                 
 
                 
