@@ -93,9 +93,8 @@ Send a login request to the server with the credentials
 + Response 419 (application/json)
 
         {  
-            "error":{  
-                "message":"Credentials are invalid"
-            }
+            "message":"Credentials are invalid"
+
         }
 
 + Response 422 (application/json)
@@ -129,9 +128,7 @@ Send a login request to the server with the credentials
 + Response 500 (application/json)
 
         {
-            "error" : {
-                "message" : "Oops! Some error occurred in the server"
-            }
+            "message" : "Oops! Some error occurred in the server"
         }
 
 ### Logout [POST /api/logout]]
@@ -155,19 +152,15 @@ Send a logout request to the server with the token
         }
 
 + Response 400 (application/json)
-    
-            {
-            "error": {
-                "message": "Token is Invalid"
-                }
-            }
+
+        {
+            "message": "Token is Invalid"
+        }
 
 + Response 400 (application/json)
-    
+
             {
-                "error": {
-                    "message": "Token is Expired"
-                }
+                "message": "Token is Expired"
             }
             
 + Response 500 (application/json)
@@ -352,7 +345,6 @@ We can also create a new table. It takes a JSON response and returns all tables 
 + Response 500 (application/json)
 
         {
-
             "message": "Some error occurred while creating table."
         }
         
@@ -407,10 +399,7 @@ Delete  a particular table name;
 + Response 404 (application/json)
 
         {
-            "error": 
-            {
-                "message": "You are trying to access menu not in database."
-            }
+            "message": "You are trying to access menu not in database."
         }
      
 + Response 500 (application/json)
@@ -463,8 +452,14 @@ To get filters for menus
         
 ### List All Menus [GET/api/menus]
 
-
 To list all the menus.
+
+`with_menu_timings`, `type` and `category` are optional filters for menu.
+
+`with_menu_timings` - Only shows the menus which is applicable for that time. Use in take order screen.  
+`type` - Used to filter the menus with type  
+`catgory` - Used to filter the menus with category
+
 
 + Request
     + Headers
@@ -472,6 +467,14 @@ To list all the menus.
             Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
             Content-Type: application/json
             Accept: application/json
+            
+    + Body 
+        
+        {
+            "with_menu_timings": "true",
+            "type" : 5,
+            "categroy" : 6,
+        }
 
 
 + Response 200 (application/json)
@@ -957,13 +960,13 @@ We can also create a new menu. It takes a JSON response and returns all menus as
 + Response 404 (application/json)
 
         {
-                "message": "You are trying to access menu not in database."
+            "message": "You are trying to access menu not in database."
         }
         
 + Response 500 (application/json)
 
         {
-                "message": "Some error occurred while retrieving menu from database."
+            "message": "Some error occurred while retrieving menu from database."
         }
  
             
@@ -1191,7 +1194,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 ### Delete a PendingOrder [DELETE/api/pending-orders]
 
-To delete a order from a particular table
+To delete a order from a particular table. `table_name` and `order_name` are optional fields in request. They are used as filters to delete the pending orders.  
 
 + Request (application/json)
 
