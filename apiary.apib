@@ -182,9 +182,6 @@ Send a logout request to the server with the token
 
 ## Table API [/api/tables/{id}]
 
-+ Parameters
-   + id (required)
-
 ### List All Tables [GET/api/tables]
 
 To list all the tables.
@@ -240,6 +237,9 @@ To list all the tables.
         
 ### Get a particular table [GET/api/tables/{id}]
 
++ Parameters
+   + id (required)
+   
 To retrieve a particular table
 
 + Request (application/json)
@@ -361,6 +361,9 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 Delete  a particular table name;
 
++ Parameters
+   + id (required)
+   
 + Request
     + Headers
 
@@ -417,9 +420,6 @@ Delete  a particular table name;
         }
         
 ## Menu API [/api/menus/{id}]
-
-+ Parameters
-   + id (required)
 
 ### Get Menu Filters [GET /api/menus/filters]
 
@@ -613,6 +613,9 @@ To list all the menus.
         
 ### Get a particular menu [GET/id/api/menus/{id}]
 
++ Parameters
+   + id (required) - Id of the menu
+   
 To retrieve a particular menu
 
 + Request
@@ -813,8 +816,11 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 ### Update a Menu [PUT/api/menus/{id}]
 
-We can also create a new table. It takes a JSON response and returns all tables as response.
+We can also create a new menu. It takes a JSON response and returns all menus as response.
 
++ Parameters
+   + id (required) - Id of the menu
+   
 + Request 
 
     + Headers
@@ -965,6 +971,9 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 To delete a menu.
 
++ Parameters
+   + id (required) - Id of the menu
+   
 + Request
     + Headers
 
@@ -1055,16 +1064,10 @@ To delete a menu.
         
 ## Pending Order API [/api/pending-orders/{order-name}/tables/{table-name}]
 
-+ Parameters
-   + order-name
-   + table-name 
-
 ### Pending Orders List[GET/api/pending-orders]
 
 To list all the pending orders with filter
 
-
-Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/
 
 + Request
 
@@ -1234,9 +1237,6 @@ To delete a order from a particular table
 
 To list all the orders.
 
-
-Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/
-
 + Request (application/json)
 
     + Headers
@@ -1352,7 +1352,7 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
 ## Report API [/api/reports]
 
-### Get Data from ItemSalesReport [GET/api/reports/daily/sales-report]
+### SalesReport [GET/api/reports/daily/sales-report]
 
 
 We can also create a new order. It takes a JSON response and returns all tables as response.
