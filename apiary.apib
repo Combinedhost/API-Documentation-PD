@@ -1,10 +1,9 @@
 FORMAT: 1A
 
-HOST:  http://staging-hotel-app.us-west-2.elasticbeanstalk.com
+HOST:  http://api-testing-mealee.layorz.com/
 
 # Order Taking System
 
-Testing Server : http://pd-testing.us-west-2.elasticbeanstalk.com/
 
 Note : Refer to the url in the production for our purpose
 
@@ -26,8 +25,16 @@ Send a login request to the server with the credentials
     + Headers
 
             X-Requested-With: XMLHttpRequest
+            
     
     + Body 
+
+                {
+                    "email" : "test@gmail.com",
+                    "password" : "12345678"
+                }
+
++ Response 200
 
             {
                 "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktdGVzdGluZy1tZWFsZWUubGF5b3J6LmNvbVwvXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTg0NzgzOTI3LCJleHAiOjE1ODQ3OTgzMjcsIm5iZiI6MTU4NDc4MzkyNywianRpIjoiRkhhS0VNTVVxTUhSc2VudyIsInN1YiI6NywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.06kAL_o3zBEBI3Xj54FZztkxgE7O1hYqdvIRgKR1bEc",
@@ -82,16 +89,6 @@ Send a login request to the server with the credentials
                     "phone_no":"9090909090"
                 }
             }
-            
-+ Response 200 (application/json)
-
-        {
-            "data": {
-            "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTYwNzQ2LCJleHAiOjE1NjcxNjQzNDYsIm5iZiI6MTU2NzE2MDc0NiwianRpIjoicDNQcVlRa3kwWmJqUkpMaCIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.UxwJnoDVbHxNDuCpMTCXXITeYx_Cpx72wUWf-J27xGY",
-            "token_type": "bearer",
-            "expires_in": 3600
-            }
-        }
 
 + Response 419 (application/json)
 
@@ -146,7 +143,8 @@ Send a logout request to the server with the token
     + Headers
 
             Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
-            X-Requested-With: XMLHttpRequest
+            Content-Type: application/json
+            Accept: application/json
 
 
 
@@ -190,6 +188,15 @@ Send a logout request to the server with the token
 ### List All Tables [GET/api/tables]
 
 To list all the tables.
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
 
 + Response 200 (application/json)
 
@@ -235,6 +242,14 @@ To list all the tables.
 
 To retrieve a particular table
 
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
 + Response 200 (application/json)
 
 
@@ -263,10 +278,17 @@ To retrieve a particular table
 We can also create a new table. It takes a JSON response and returns all tables as response.
 
 + Request 
+    + Headers
 
-        {
-            "name" : "6"
-        }
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+            {
+                "name" : "6"
+            }
 
 + Response 200 (application/json)
 
@@ -339,6 +361,13 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 Delete  a particular table name;
 
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
 + Response 200 (application/json)
 
          [
@@ -396,6 +425,13 @@ Delete  a particular table name;
 
 To get filters for menus
 
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
 + Response 200 (application/json)
 
         {
@@ -429,6 +465,14 @@ To get filters for menus
 
 
 To list all the menus.
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
 
 + Response 200 (application/json)
 
@@ -571,6 +615,13 @@ To list all the menus.
 
 To retrieve a particular menu
 
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
 + Response 200 (application/json)
 
             {
@@ -616,17 +667,25 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 + Request 
 
-        {
-            "name" : "fefj",
-            "price" : 34,
-            "status" : true,
-            "time_of_day" : {"night" : true,"morning" : true,"evening" : true,"afternoon" : false},
-            "category_id" : "1",
-            "category_name" : "",
-            "type_id" : "1",
-            "type_name" : "",
-            "description" : "test"
-        }
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+            {
+                "name" : "fefj",
+                "price" : 34,
+                "status" : true,
+                "time_of_day" : {"night" : true,"morning" : true,"evening" : true,"afternoon" : false},
+                "category_id" : "1",
+                "category_name" : "",
+                "type_id" : "1",
+                "type_name" : "",
+                "description" : "test"
+            }
 
 + Response 200 (application/json)
 
@@ -758,18 +817,25 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 + Request 
 
+    + Headers
 
-        {
-            "name" : "fefj",
-            "price" : 34,
-            "status" : true,
-            "time_of_day" : {"night" : true,"morning" : true,"evening" : true,"afternoon" : false},
-            "category_id" : "1",
-            "category_name" : "",
-            "type_id" : "1",
-            "type_name" : "",
-            "description" : "test"
-        }
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+            {
+                "name" : "fefj",
+                "price" : 34,
+                "status" : true,
+                "time_of_day" : {"night" : true,"morning" : true,"evening" : true,"afternoon" : false},
+                "category_id" : "1",
+                "category_name" : "",
+                "type_id" : "1",
+                "type_name" : "",
+                "description" : "test"
+            }
 
 + Response 200 (application/json)
 
@@ -899,6 +965,13 @@ We can also create a new table. It takes a JSON response and returns all tables 
 
 To delete a menu.
 
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
 + Response 200 (application/json)
 
         [
@@ -993,12 +1066,20 @@ To list all the pending orders with filter
 
 Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/
 
-+ Request 
++ Request
 
-            {
-                "date" : "07-03-2020"
-            }
-            
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+                {
+                    "date" : "07-03-2020"
+                }
+                
 + Response 200 (application/json)
 
         [
@@ -1031,6 +1112,13 @@ Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/
 
 ### Get all pending order names [GET /api/pending-order/get-all-names/]
 
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
 + Response 200(application/json)
 
         [
@@ -1043,20 +1131,29 @@ Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/pending-orders/
 
 We can also create a new table. It takes a JSON response and returns all tables as response.
 
-+ Request 
++ Request
 
-        {
-            "table_name": "1"
-            "order_name": "gowtham"
-            "order": [
-                    {
-                        "item_id":2,
-                        "quantity":2,
-                        "price": 30,
-                        "item_name": "Plain Dosa"
-                    }
-                ]    
-        }
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+
++ Body
+
+            {
+                "table_name": "1"
+                "order_name": "gowtham"
+                "order": [
+                        {
+                            "item_id":2,
+                            "quantity":2,
+                            "price": 30,
+                            "item_name": "Plain Dosa"
+                        }
+                    ]    
+            }
 
 + Response 200 (application/json)
 
@@ -1095,10 +1192,18 @@ To delete a order from a particular table
 
 + Request (application/json)
 
-            {
-                "table_name" : 1,
-                "order_name" : "test",
-            }
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+            
+    + Body
+
+                {
+                    "table_name" : 1,
+                    "order_name" : "test",
+                }
             
 + Response 200 (application/json)
 
@@ -1134,10 +1239,18 @@ Example - http://pd-testing.us-west-2.elasticbeanstalk.com/api/orders/
 
 + Request (application/json)
 
-            {
-                "date" : "02-07-18"
-            }
-    
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+                {
+                    "date" : "02-07-18"
+                }
+        
 
 + Response 200 (application/json)
 
@@ -1178,21 +1291,29 @@ We can also create a new order. It takes a JSON response and returns all tables 
 
 + Request 
 
-        {
-            "order": [
-                {
-                    "item_name":"Mutton Biryani",
-                    "item_id": 1,
-                    "category_id" : 1,
-                    "type_id" : 1,
-                    "price":"120",
-                    "quantity":1
-                },
-            ],
-            "sub_total": 500
-            "total":550
-            "discount":50
-        }
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+            
+    + Body
+
+            {
+                "order": [
+                    {
+                        "item_name":"Mutton Biryani",
+                        "item_id": 1,
+                        "category_id" : 1,
+                        "type_id" : 1,
+                        "price":"120",
+                        "quantity":1
+                    },
+                ],
+                "sub_total": 500
+                "total":550
+                "discount":50
+            }
 
 + Response 200 (application/json)
 
@@ -1237,10 +1358,17 @@ We can also create a new order. It takes a JSON response and returns all tables 
 We can also create a new order. It takes a JSON response and returns all tables as response.
 
 + Request 
+    + Headers
 
-        {
-            "date": 27-10-2019
-        }
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
++ Body
+
+            {
+                "date": 27-10-2019
+            }
 
 + Response 200 (application/json)
 
@@ -1252,7 +1380,7 @@ We can also create a new order. It takes a JSON response and returns all tables 
                     "date": "31-05-2017",
                     "time": "06-02 AM",
                     "discount": 9,
-                    "sub_total": 224,
+]                    "sub_total": 224,
                     "total": 215,
                     "order": "[{\"cat_id\": 1, \"item_id\": 1, \"type_id\": 2, \"quantity\": 3}]"
                 },
@@ -1321,12 +1449,19 @@ We can also create a new order. It takes a JSON response and returns all tables 
 ### Feedback API [POST]
 
 + Request (application/json)
+    + Headers
 
-        {
-            "type" : "issue",
-            "title" : "test",
-            "description" : test"
-        }
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+            {
+                "type" : "issue",
+                "title" : "test",
+                "description" : test"
+            }
         
 + Response 200 (application/json)
 
@@ -1334,9 +1469,16 @@ We can also create a new order. It takes a JSON response and returns all tables 
             "message" : "Feedback submitted successgully"
         }
         
-## Setings API [/api/settings]
+## Settings API [/api/settings]
 
 ### Get Menu Settings [GET /api/settings/menu]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
 
 + Response 200 (application/json)
 
