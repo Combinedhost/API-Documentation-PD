@@ -694,6 +694,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
     + Body
 
             {
+                "image": "multipart image upload",
                 "name" : "fefj",
                 "price" : 34,
                 "status" : true,
@@ -811,6 +812,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
             }
         }
     
+
 + Response 422 (application/json)
 
         {
@@ -818,6 +820,18 @@ We can also create a new table. It takes a JSON response and returns all tables 
             "errors": {
                 "name": [
                     "The name has already been taken."
+                ]
+            }
+        }
+
+
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "image": [
+                    "The image must be an image."
                 ]
             }
         }
