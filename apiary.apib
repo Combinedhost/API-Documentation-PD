@@ -130,6 +130,20 @@ Send a login request to the server with the credentials
         {
             "message" : "Oops! Some error occurred in the server"
         }
+        
+### Refresh API [POST /api/refresh]
+
++ Request (application/json)
+
+    + Headers
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+
++ Response (application/json)
+
+    + Headers
+            access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            refresh_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 
 ### Logout [POST /api/logout]
 
@@ -166,9 +180,7 @@ Send a logout request to the server with the token
 + Response 500 (application/json)
 
         {
-            "error": {
-                "message": "Authorisation token not found"
-                }
+            "message": "Authorisation token not found"
         }
 
 
