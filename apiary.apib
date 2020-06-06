@@ -87,6 +87,13 @@ Send a login request to the server with the credentials
                     "state":"TamilNadu",
                     "country":"India",
                     "phone_no":"9090909090"
+                },
+                "s3_credentials" : {
+                    "access_key": "AKIAYHBGZVNOFL42RHZI",
+                    "secret_key": "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",
+                    "region" : "us-east-1"
+                    "bucket": "mealee-testing",
+                    "folder": "mobile_upload"
                 }
             }
 
@@ -129,7 +136,7 @@ Send a login request to the server with the credentials
         {
             "message" : "Oops! Some error occurred in the server"
         }
-        
+
 ### Refresh API [POST /api/refresh]
 
 + Request (application/json)
@@ -143,6 +150,39 @@ Send a login request to the server with the credentials
     + Headers
             access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
             refresh_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+
+### App Versioning API [POST /api/refresh]
+
++ Request (application/json)
+
+    + Headers
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+    
+    + Body 
+            {
+                "app_version" : 1.1
+            }
+            
++ Response 200 (application/json)
+
+        {
+            "status" : "update",
+            "message" : "New update is available. Click here to update.",
+        }
+
++ Response 200 (application/json)
+
+        {
+            "status" : "force",
+            "message" : "You are using a outdated version. Kindly update to continue.",
+        }
+
++ Response 200 (application/json)
+
+        {
+            "status" : "none",
+            "message" : "none",
+        }
 
 ### Logout [POST /api/logout]
 
@@ -181,8 +221,6 @@ Send a logout request to the server with the token
         {
             "message": "Authorisation token not found"
         }
-
-
 
 ## Table API [/api/tables/{id}]
 
@@ -484,7 +522,7 @@ To list all the menus.
         {
             "with_menu_timings": "false",
             "type" : 5,
-            "categroy" : 6,
+            "category" : 6,
         }
 
 
@@ -700,7 +738,7 @@ We can also create a new table. It takes a JSON response and returns all tables 
     + Body
 
             {
-                "image": "multipart image upload",
+                "image": "test_image.png",
                 "name" : "fefj",
                 "price" : 34,
                 "status" : true,
@@ -871,6 +909,7 @@ We can also create a new menu. It takes a JSON response and returns all menus as
     + Body
 
             {
+                "image" : "test_image.png",
                 "name" : "fefj",
                 "price" : 34,
                 "status" : true,
