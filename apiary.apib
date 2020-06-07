@@ -36,58 +36,12 @@ Send a login request to the server with the credentials
 
 + Response 200
 
-            {
+            {   
+                "account_verified" : true,
+                "profile_created" : true,
                 "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktdGVzdGluZy1tZWFsZWUubGF5b3J6LmNvbVwvXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTg0NzgzOTI3LCJleHAiOjE1ODQ3OTgzMjcsIm5iZiI6MTU4NDc4MzkyNywianRpIjoiRkhhS0VNTVVxTUhSc2VudyIsInN1YiI6NywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.06kAL_o3zBEBI3Xj54FZztkxgE7O1hYqdvIRgKR1bEc",
                 "token_type":"bearer",
                 "expires_in":14400,
-                "roles":[
-                    "admin",
-                    "branch_admin"
-                ],
-                "permissions":[
-                    "view_menu",
-                    "view_menu",
-                    "create_menu",
-                    "create_menu",
-                    "update_menu",
-                    "update_menu",
-                    "delete_menu",
-                    "delete_menu",
-                    "create_pending_order",
-                    "create_pending_order",
-                    "update_pending_order",
-                    "update_pending_order",
-                    "delete_pending_order",
-                    "delete_pending_order",
-                    "create_order",
-                    "create_order",
-                    "update_order",
-                    "delete_order",
-                    "generate_sales_report",
-                    "generate_sales_report",
-                    "view_order",
-                    "view_order"
-                ],
-                "name":"Test",
-                "bill_slug":"TE",
-                "company":{
-                    "name":"TEst",
-                    "address1":"Test",
-                    "address2":"Test",
-                    "city":"Ariyalur",
-                    "state":"TamilNadu",
-                    "country":"India",
-                    "phone_no":"9090909090"
-                },
-                "branch":{
-                    "name":"TEst",
-                    "address1":"Test",
-                    "address2":"Test",
-                    "city":"Ariyalur",
-                    "state":"TamilNadu",
-                    "country":"India",
-                    "phone_no":"9090909090"
-                },
                 "s3_credentials" : {
                     "access_key": "AKIAYHBGZVNOFL42RHZI",
                     "secret_key": "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",
@@ -137,6 +91,398 @@ Send a login request to the server with the credentials
             "message" : "Oops! Some error occurred in the server"
         }
 
+### Current User [POST /api/me]
+
++ Response 200 (application/json)
+
+        {
+            "roles":[
+                    "admin",
+                    "branch_admin"
+                ],
+                "permissions":[
+                    "view_menu",
+                    "view_menu",
+                    "create_menu",
+                    "create_menu",
+                    "update_menu",
+                    "update_menu",
+                    "delete_menu",
+                    "delete_menu",
+                    "create_pending_order",
+                    "create_pending_order",
+                    "update_pending_order",
+                    "update_pending_order",
+                    "delete_pending_order",
+                    "delete_pending_order",
+                    "create_order",
+                    "create_order",
+                    "update_order",
+                    "delete_order",
+                    "generate_sales_report",
+                    "generate_sales_report",
+                    "view_order",
+                    "view_order"
+                ],
+                "name":"Test",
+                "bill_slug":"TE",
+                "company":{
+                    "name":"TEst",
+                    "address1":"Test",
+                    "address2":"Test",
+                    "city":"Ariyalur",
+                    "state":"TamilNadu",
+                    "country":"India",
+                    "phone_no":"9090909090"
+                },
+                "branch":{
+                    "name":"TEst",
+                    "address1":"Test",
+                    "address2":"Test",
+                    "city":"Ariyalur",
+                    "state":"TamilNadu",
+                    "country":"India",
+                    "phone_no":"9090909090"
+                },
+        }
+
+### Country List API [POST /api/countries]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id" : 1,
+                "name" : "India",
+                "code" : "IN",
+            },
+            {
+                "id" : 2,
+                "name" : "United States",
+                "code" : "US",
+            }
+        ]
+        
+### State List API [POST /api/countries/{id}/states]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id" : 1,
+                "name" : "Tamil Nadu",
+                "code" : "TN",
+            },
+            {
+                "id" : 2,
+                "name" : "Andra Pradhesh",
+                "code" : "AP",
+            }
+        ]
+        
+### Cities List API [POST /api/countries/{countryId}/states/{stateId}/cities]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id" : 1,
+                "name" : "Trichy",
+                "code" : "TR",
+            },
+            {
+                "id" : 2,
+                "name" : "Karur",
+                "code" : "KR"
+            }
+        ]
+
+        
+### Sub Cities List API [POST /api/countries/{countryId}/states/{stateId}/cities/{cityId}/sub-cities]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id" : 1,
+                "name" : "Manmangalam",
+            },
+            {
+                "id" : 2,
+                "name" : "Velayutham Palayam",
+            }
+        ]
+        
+        
+### Register API [POST /api/register]
+
+Send a register request with the credentials
+
++ Request (application/json)
+
+    + Headers
+
+            X-Requested-With: XMLHttpRequest
+            
+    
+    + Body 
+
+                {
+                    "name" : "Vetri",
+                    "phone_no" : 9677998857,
+                }
+
++ Response 200 (application/json)
+
+            {
+                "message" : "Register successfuly. Kindly enter business profile"
+            }
+            
++ Response 422 (application/json)
+
+        {  
+            "message":"The given data was invalid.",
+            "errors": {  
+                "phone_no": [   
+                    "This phone no is already registered. Try to login."
+                ]
+            }
+        }
+                    
++ Response 422 (application/json)
+
+        {  
+            "message":"The given data was invalid.",
+            "errors": {  
+                "name": [  
+                    "The name is required."
+                ],
+                "phone_no": [   
+                    "Enter a valid phone_no"
+                ]
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "message" : "Oops! Some error occurred in the server"
+        }
+
+### Verify OTP [POST /api/verify]
+
++ Request
+
+    + Body 
+
+            {
+                "otp" : 24534,
+            }
+                
+
++ Response 200 (application/json)
+
+        {
+            "message": "Account Verified Successfully"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "message": "OTP doesn't match"
+        }
+        
+
+### Resend OTP [POST /api/resend_otp]
+
++ Response 200 (application/json)
+
+        {
+            "message": "OTP sent successfully"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "message": "Some error occurred while resending OTP"
+        }
+        
+
+### Forget Password [POST /api/forget]
+
++ Response 200 (application/json)
+
+        {
+            "phone_no": "9994874831"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "message": "Some error occurred while resending OTP"
+        }
+        
+
+
+### Create Business Profile API [POST /api/register/profile]
+
++ Request (application/json)
+
+    + Headers
+
+            X-Requested-With: XMLHttpRequest
+            
+    
+    + Body 
+
+                {
+                    "email" : "vetripd@gmail.com",
+                    "password" : "pdsastra",
+                    "password_confirmation" : "pdsastra",
+                    "company_name" : "Punjabi Dhaba",
+                    "address_line_1" : "Sastra University Opposite",
+                    "address_line_2" : "Thirumalaisamudram",
+                    "sub_city" : 2,
+                    "city" : 1,
+                    "state" : 2,
+                    "country" : 1,
+                    "pincode" : 639006
+                    "bill_slug" : "PDSAS"
+                }
+
++ Response 200 (application/json)
+
+            {
+                "roles":[
+                    "admin",
+                    "branch_admin"
+                ],
+                "permissions":[
+                    "view_menu",
+                    "view_menu",
+                    "create_menu",
+                    "create_menu",
+                    "update_menu",
+                    "update_menu",
+                    "delete_menu",
+                    "delete_menu",
+                    "create_pending_order",
+                    "create_pending_order",
+                    "update_pending_order",
+                    "update_pending_order",
+                    "delete_pending_order",
+                    "delete_pending_order",
+                    "create_order",
+                    "create_order",
+                    "update_order",
+                    "delete_order",
+                    "generate_sales_report",
+                    "generate_sales_report",
+                    "view_order",
+                    "view_order"
+                ],
+                "name":"Test",
+                "bill_slug":"TE",
+                "company":{
+                    "name":"TEst",
+                    "address1":"Test",
+                    "address2":"Test",
+                    "city":"Ariyalur",
+                    "state":"TamilNadu",
+                    "country":"India",
+                    "phone_no":"9090909090"
+                },
+                "branch":{
+                    "name":"TEst",
+                    "address1":"Test",
+                    "address2":"Test",
+                    "city":"Ariyalur",
+                    "state":"TamilNadu",
+                    "country":"India",
+                    "phone_no":"9090909090"
+                },
+        }
+
++ Response 419 (application/json)
+
+        {  
+            "message":"Credentials are invalid"
+        }
+
++ Response 422 (application/json)
+
+        {  
+            "message":"The given data was invalid.",
+            "errors": {  
+                "email": [  
+                    "The email must be a valid email address."
+                ],
+                "password": [   
+                    "The password must be at least 8 characters."
+                ],
+                "city" : [
+                    "City id is not valid"
+                ],
+                "state" : [
+                    "State id is not valid"
+                ],
+                "sub_city" :[
+                    "Sub city id is not valid"
+                ],
+                "country" : [
+                    "Country id is not valid"
+                ],
+                "pincode" : [
+                    "Pincode is not valid" 
+                ],
+            }
+        }
+        
++ Response 422 (application/json)
+
+        {
+            "message": "The given data was invalid.",
+            "errors": {
+                "email": [
+                    "The email field is required."
+                ],
+                "password": [
+                    "The password field is required."
+                ],
+                "city" : [
+                    "City id is not valid"
+                ],
+                "state" : [
+                    "State id is not valid"
+                ],
+                "sub_city" :[
+                    "Sub city id is not valid"
+                ],
+                "country" : [
+                    "Country id is not valid"
+                ],
+                "pincode" : [
+                    "Pincode is not valid" 
+                ],
+                "company_name" :[
+                    "Company name is required"
+                ],
+                "address_1" : [
+                    "Address is required"
+                ],
+                "address_2" : [
+                    "Address is required"
+                ]
+                
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "message" : "Oops! Some error occurred in the server"
+        }
+
 ### Refresh API [POST /api/refresh]
 
 + Request (application/json)
@@ -151,7 +497,7 @@ Send a login request to the server with the credentials
             access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
             refresh_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 
-### App Versioning API [POST /api/refresh]
+### App Versioning API [GET /api/app-version]
 
 + Request (application/json)
 
@@ -159,9 +505,10 @@ Send a login request to the server with the credentials
             Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
     
     + Body 
-            {
-                "app_version" : 1.1
-            }
+
+                {
+                    "app_version" : 1.1
+                }
             
 + Response 200 (application/json)
 
