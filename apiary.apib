@@ -91,7 +91,7 @@ Send a login request to the server with the credentials
             "message" : "Oops! Some error occurred in the server"
         }
 
-### Current User [POST /api/me]
+### Current User [GET /api/me]
 
 + Response 200 (application/json)
 
@@ -101,28 +101,22 @@ Send a login request to the server with the credentials
                     "branch_admin"
                 ],
                 "permissions":[
-                    "view_menu",
-                    "view_menu",
-                    "create_menu",
-                    "create_menu",
-                    "update_menu",
-                    "update_menu",
-                    "delete_menu",
-                    "delete_menu",
-                    "create_pending_order",
-                    "create_pending_order",
-                    "update_pending_order",
-                    "update_pending_order",
-                    "delete_pending_order",
-                    "delete_pending_order",
-                    "create_order",
-                    "create_order",
-                    "update_order",
-                    "delete_order",
-                    "generate_sales_report",
-                    "generate_sales_report",
-                    "view_order",
-                    "view_order"
+                       "view_menu",
+                        "create_menu",
+                        "update_menu",
+                        "delete_menu",
+                        "create_pending_order",
+                        "update_pending_order",
+                        "delete_pending_order",
+                        "create_order",
+                        "update_order",
+                        "delete_order",
+                        "generate_sales_report",
+                        "view_order",
+                        "change_menu_settings",
+                        "change_report_settings",
+                        "change_language_settings",
+                        "post_feedback"
                 ],
                 "name":"Test",
                 "bill_slug":"TE",
@@ -146,7 +140,7 @@ Send a login request to the server with the credentials
                 },
         }
 
-### Country List API [POST /api/countries]
+### Country List API [GET /api/countries]
 
 + Response 200 (application/json)
 
@@ -163,7 +157,7 @@ Send a login request to the server with the credentials
             }
         ]
         
-### State List API [POST /api/countries/{id}/states]
+### State List API [GET /api/countries/{id}/states]
 
 + Response 200 (application/json)
 
@@ -180,7 +174,7 @@ Send a login request to the server with the credentials
             }
         ]
         
-### Cities List API [POST /api/countries/{countryId}/states/{stateId}/cities]
+### Cities List API [GET /api/countries/{countryId}/states/{stateId}/cities]
 
 + Response 200 (application/json)
 
@@ -198,7 +192,7 @@ Send a login request to the server with the credentials
         ]
 
         
-### Sub Cities List API [POST /api/countries/{countryId}/states/{stateId}/cities/{cityId}/sub-cities]
+### Sub Cities List API [GET /api/countries/{countryId}/states/{stateId}/cities/{cityId}/sub-cities]
 
 + Response 200 (application/json)
 
@@ -322,6 +316,36 @@ Send a register request with the credentials
             "message": "Some error occurred while resending OTP"
         }
         
+        
+### Change Password [POST /api/change-password]
+
++ Request (application/json)
+
+    + Headers
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+            X-Requested-With: XMLHttpRequest
+            
+    
+    + Body
+
+                {
+                    "password": "12345678",
+                    "password_confirmation": "12345678"
+                }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Password Changes successfully"
+        }
+    
+        
++ Response 400 (application/json)
+
+        {
+            "message": "Some error occurred while resending OTP"
+        }
+        
 
 
 ### Create Business Profile API [POST /api/register/profile]
@@ -401,12 +425,6 @@ Send a register request with the credentials
                     "country":"India",
                     "phone_no":"9090909090"
                 },
-        }
-
-+ Response 419 (application/json)
-
-        {  
-            "message":"Credentials are invalid"
         }
 
 + Response 422 (application/json)
