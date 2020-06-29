@@ -31,7 +31,8 @@ Send a login request to the server with the credentials
 
                 {
                     "email" : "test@gmail.com",
-                    "password" : "12345678"
+                    "password" : "12345678",
+                    "business_type" : 1,
                 }
 
 + Response 200
@@ -120,6 +121,7 @@ Send a login request to the server with the credentials
                 ],
                 "name":"Test",
                 "bill_slug":"TE",
+                "subscription_active": "active",
                 "company":{
                     "name":"TEst",
                     "address1":"Test",
@@ -821,6 +823,372 @@ Delete  a particular table name;
         {
             "message": "Some error occurred while updating menu."
         }
+
+
+## Types API [/api/types/{id}]
+
+### List All Tables [GET/api/types]
+
+To list all the types.
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
++ Response 200 (application/json)
+
+         [
+            {
+                "id": 40,
+                "name": "Veg"
+            },
+            {
+                "id": 7,
+                "name": "Non Veg"
+            }
+        ]
+
++ Response 500 (application/json)
+
+        {
+         
+            "message": "Some error occurred while retrieving table from database."
+        }
+        
+### Update a particular type [PUT/api/types/{id}]
+
++ Parameters
+   + id (required)
+   
+To retrieve a particular table
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+    
+    + Body (application/json)
+
+                    {
+                        "name" : "Veg"
+                    }
+
++ Response 200 (application/json)
+
+         [
+            {
+                "id": 40,
+                "name": "Veg"
+            },
+            {
+                "id": 7,
+                "name": "Non Veg"
+            }
+        ]
+
++ Response 404 (application/json)
+
+        {
+            "message": "You are trying to access a table not in database."
+        }
+    
+
++ Response 500 (application/json)
+
+        {
+
+            "message": "Some error occurred while retrieving table from database."
+        }
+      
+### Create a new Type [POST/api/types]
+
+We can also create a new types. It takes a JSON response and returns all types as response.
+
++ Request 
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+            {
+                "name" : "6"
+            }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 40,
+                "name": "Veg"
+            },
+            {
+                "id": 7,
+                "name": "Non Veg"
+            }
+        ]
+    
++ Response 422 (application/json)
+
+        {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name field is required."
+                ]
+            }
+        }
+    
++ Response 422 (application/json)
+
+        {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name has already been taken."
+                ]
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while creating table."
+        }
+        
+        
+### Delete a Type [DELETE/api/types/{id}]
+
+Delete  a particular type;
+
++ Parameters
+   + id (required)
+   
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 40,
+                "name": "Veg"
+            },
+            {
+                "id": 7,
+                "name": "Non Veg"
+            }
+        ]
+    
++ Response 404 (application/json)
+
+        {
+            "message": "You are trying to access menu not in database."
+        }
+     
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while updating menu."
+        }
+
+
+## Categories API [/api/categories/{id}]
+
+### List All Categories [GET/api/categories]
+
+To list all the categories.
+
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 40,
+                "name": "Briyani"
+            },
+            {
+                "id": 7,
+                "name": "South Indian"
+            }
+        ]
+    
++ Response 500 (application/json)
+
+        {
+         
+            "message": "Some error occurred while retrieving table from database."
+        }
+        
+### Update a particular category [PUT/api/categories/{id}]
+
++ Parameters
+   + id (required)
+   
+To retrieve a particular category
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+    
+    + Body (application/json)
+
+                {
+                    "name" : "Veg"
+                }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 40,
+                "name": "Briyani"
+            },
+            {
+                "id": 7,
+                "name": "South Indian"
+            }
+        ]
+    
++ Response 404 (application/json)
+
+        {
+            "message": "You are trying to access a table not in database."
+        }
+    
+
++ Response 500 (application/json)
+
+        {
+
+            "message": "Some error occurred while retrieving table from database."
+        }
+      
+### Create a new Category [POST/api/categories]
+
+We can also create a new categories. It takes a JSON response and returns all types as response.
+
++ Request 
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
+    + Body
+
+            {
+                "name" : "6"
+            }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 40,
+                "name": "Briyani"
+            },
+            {
+                "id": 7,
+                "name": "South Indian"
+            }
+        ]
+    
++ Response 422 (application/json)
+
+        {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name field is required."
+                ]
+            }
+        }
+    
++ Response 422 (application/json)
+
+        {
+            "message": "Validation failed",
+            "errors": {
+                "name": [
+                    "The name has already been taken."
+                ]
+            }
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while creating table."
+        }
+        
+        
+### Delete a Category [DELETE/api/categories/{id}]
+
+Delete a particular categories;
+
++ Parameters
+   + id (required)
+   
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 40,
+                "name": "Briyani"
+            },
+            {
+                "id": 7,
+                "name": "South Indian"
+            }
+        ]
+    
++ Response 404 (application/json)
+
+        {
+            "message": "You are trying to access menu not in database."
+        }
+     
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while updating menu."
+        }
+
+
         
 ## Menu API [/api/menus/{id}]
 
@@ -1086,6 +1454,57 @@ To retrieve a particular menu
         {
             "message": "Some error occurred while retrieving menu from database."
         }
+
+### Change Menu Status[POST /api/menus/{id}/change-status]
+
++ Parameters
+   + id (required) - Id of the menu
+   
+To retrieve a particular menu
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9teXdlYmFwcC50ZXN0XC9hcGlcL2xvZ2luIiwiaWF0IjoxNTY3MTQ2NzIzLCJleHAiOjE1NjcxNTAzMjMsIm5iZiI6MTU2NzE0NjcyMywianRpIjoiREpwc1NxakRCeTZyQllidiIsInN1YiI6MSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.CFHxoso490eMWt3-FCW3ZqljD9_7ddAPWEoOhEuAkq4
+            Content-Type: application/json
+            Accept: application/json
+    
+    + Body
+
+            {
+                "status": true
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Menu enabled successfully."
+        }
+
++ Response 422 (application/json)
+
+         {       {
+            "message": "Validation failed",
+            "errors": {
+                "status": [
+                    "Value should be a boolean."
+                ]
+            }
+        }
+
++ Response 404 (application/json)
+
+        {
+            "message": "You are trying to access a menu not in database."
+        }
+    
+
++ Response 500 (application/json)
+
+        {
+            "message": "Some error occurred while enabling menu."
+        }
+ 
  
 ### Create a new Menu [POST/api/menus]
 
@@ -1586,21 +2005,21 @@ We can also create a new table. It takes a JSON response and returns all tables 
             Accept: application/json
 
 
-+ Body
+    + Body
 
-            {
-                "table_name": "1"
-                "order_name": "gowtham"
-                "order": [
-                        {
-                            "item_id":2,
-                            "quantity":2,
-                            "price": 30,
-                            "item_name": "Plain Dosa"
-                        }
-                    ]    
-            }
-
+                {
+                    "table_name": "1"
+                    "order_name": "gowtham"
+                    "order": [
+                            {
+                                "item_id":2,
+                                "quantity":2,
+                                "price": 30,
+                                "item_name": "Plain Dosa"
+                            }
+                        ]    
+                }
+    
 + Response 200 (application/json)
 
         {
